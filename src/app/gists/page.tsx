@@ -1,3 +1,8 @@
+import { getServerSession } from "next-auth";
+import { redirect } from "next/navigation";
+
+import { options } from "@/next-auth/options";
+
 const GistsPage = () => {
   return (
     <div>

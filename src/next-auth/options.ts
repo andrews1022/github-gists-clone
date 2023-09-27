@@ -1,3 +1,4 @@
+import { sessions } from "./../drizzle/schema";
 import GitHubProvider from "next-auth/providers/github";
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import { db } from "@/drizzle/config";
