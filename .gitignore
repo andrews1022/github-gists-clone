@@ -33,3 +33,16 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# drizzle
+.vscode
+dist
+dist.new
+*.tsbuildinfo
+*.tgz
+/*.sql
+.cache
+.turbo
+.rollup.cache
+dist-dts
+rollup.config-*.mjs
