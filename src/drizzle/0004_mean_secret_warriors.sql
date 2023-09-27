@@ -1,0 +1,1 @@
+ALTER TABLE "account" ADD COLUMN "providerLogin" text NOT NULL;

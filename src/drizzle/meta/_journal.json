@@ -8,6 +8,41 @@
       "when": 1695774285233,
       "tag": "0000_brown_argent",
       "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1695853661997,
+      "tag": "0001_icy_hulk",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1695854117612,
+      "tag": "0002_curved_wendigo",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "5",
+      "when": 1695856166622,
+      "tag": "0003_greedy_silver_centurion",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "5",
+      "when": 1695856283506,
+      "tag": "0004_mean_secret_warriors",
+      "breakpoints": true
+    },
+    {
+      "idx": 5,
+      "version": "5",
+      "when": 1695856689331,
+      "tag": "0005_crazy_invaders",
+      "breakpoints": true
     }
   ]
 }
