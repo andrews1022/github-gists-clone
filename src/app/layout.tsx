@@ -27,7 +27,7 @@ const RootLayout = ({ children }: RootLayoutProps) => {
     <html lang="en">
       <body className={`${roboto.className} flex flex-col min-h-screen`}>
         <Navbar />
-        <main>{children}</main>
+        <main className="container mt-8">{children}</main>
         <Footer />
       </body>
     </html>
