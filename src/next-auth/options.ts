@@ -6,6 +6,9 @@ import type { AuthOptions } from "next-auth";
 
 const options: AuthOptions = {
   adapter: DrizzleAdapter(db),
+  pages: {
+    signIn: "/sign-in"
+  },
   providers: [
     GitHubProvider({
       clientId: process.env.GITHUB_CLIENT_ID!,
