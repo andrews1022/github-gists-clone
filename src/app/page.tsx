@@ -1,14 +1,23 @@
 import { getServerSession } from "next-auth";
+import Link from "next/link";
+
 import { options } from "@/next-auth/options";
 
 const HomePage = async () => {
   const session = await getServerSession(options);
 
   return (
-    <div>
-      <h1>HomePage</h1>
+    <div className="flex flex-col items-center gap-y-6">
+      <h1 className="text-7xl">Gists Clone</h1>
 
-      <pre>{JSON.stringify(session, null, 2)}</pre>
+      <p className="text-xl">A simple site to display, create, and manage your gists.</p>
+
+      <Link
+        className="border-2 border-gray-800 text-2xl py-2 px-12 rounded-lg hover:bg-gray-800 hover:text-white transition-colors"
+        href={session ? "/gists" : "/sign-in"}
+      >
+        {session ? "View Gists" : "Sign In"}
+      </Link>
     </div>
   );
 };
