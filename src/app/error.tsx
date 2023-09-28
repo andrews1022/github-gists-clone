@@ -1,5 +1,6 @@
 "use client";
 
+import { Home, RefreshCw } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 
@@ -15,18 +16,18 @@ const RootErrorPage = () => {
       </p>
 
       <button
-        className="bg-teal-600 text-white mr-6 py-2 px-4"
+        className="bg-gray-800 text-white text-2xl py-2 w-56 rounded-lg flex items-center justify-center gap-x-2 hover:bg-gray-600 transition-colors"
         onClick={() => router.refresh()}
         type="button"
       >
-        Refresh
+        <RefreshCw /> Refresh
       </button>
 
       <Link
-        className="border-2 border-gray-800 text-2xl py-2 px-12 rounded-lg hover:bg-gray-800 hover:text-white transition-colors flex items-center gap-x-2"
+        className="border-2 border-gray-800 text-2xl py-2 w-56 rounded-lg hover:bg-gray-800 hover:text-white transition-colors flex items-center justify-center gap-x-2"
         href="/"
       >
-        Go Home
+        <Home /> Go Home
       </Link>
     </div>
   );
