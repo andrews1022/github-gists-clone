@@ -30,7 +30,7 @@ const GistsPage = async () => {
         <h1 className="text-5xl">{user?.name}'s Gists</h1>
 
         <Link
-          className="border-2 border-gray-800 text-2xl py-2 px-12 rounded-lg hover:bg-gray-800 hover:text-white transition-colors"
+          className="border-2 border-emerald-600 text-emerald-600 text-2xl py-2 px-12 rounded-lg hover:bg-emerald-600 hover:text-white transition-colors"
           href="/gists/create"
         >
           Create Gist
