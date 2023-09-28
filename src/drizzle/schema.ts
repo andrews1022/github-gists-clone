@@ -50,3 +50,15 @@ export const verificationTokens = pgTable(
     compoundKey: primaryKey(vt.identifier, vt.token)
   })
 );
+
+export const gists = pgTable("gist", {
+  id: integer("id").notNull().primaryKey(),
+  userId: text("userId")
+    .notNull()
+    .references(() => users.id, { onDelete: "cascade" }),
+  name: text("name").notNull(),
+  description: text("description"),
+  code: text("code").notNull(),
+  createdAt: timestamp("createdAt").defaultNow(),
+  updatedAt: timestamp("updatedAt").defaultNow()
+});
