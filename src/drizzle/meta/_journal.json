@@ -50,6 +50,34 @@
       "when": 1695936894990,
       "tag": "0006_smart_master_chief",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "5",
+      "when": 1695948602316,
+      "tag": "0007_marvelous_baron_strucker",
+      "breakpoints": true
+    },
+    {
+      "idx": 8,
+      "version": "5",
+      "when": 1695948651291,
+      "tag": "0008_faithful_mentallo",
+      "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "5",
+      "when": 1695948679373,
+      "tag": "0009_shocking_alex_power",
+      "breakpoints": true
+    },
+    {
+      "idx": 10,
+      "version": "5",
+      "when": 1695948703229,
+      "tag": "0010_old_klaw",
+      "breakpoints": true
     }
   ]
 }
