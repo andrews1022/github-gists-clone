@@ -1,10 +1,11 @@
+import { PlusCircle } from "lucide-react";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
+import Link from "next/link";
 import { redirect } from "next/navigation";
 
-import { options } from "@/next-auth/options";
-import Link from "next/link";
 import { clientRoutes } from "@/constants/routes";
+import { options } from "@/next-auth/options";
 
 // import CodeHighlighter from "@/components/CodeHighlighter";
 
@@ -114,10 +115,10 @@ const GistsPage = async () => {
         <h1 className="text-5xl">{user?.name}'s Gists</h1>
 
         <Link
-          className="border-2 border-emerald-600 text-emerald-600 text-2xl py-2 px-12 rounded-lg hover:bg-emerald-600 hover:text-white transition-colors"
+          className="border-2 border-emerald-600 text-emerald-600 text-2xl py-2 px-12 rounded-lg hover:bg-emerald-600 hover:text-white transition-colors flex items-center gap-x-2"
           href={clientRoutes.createGist}
         >
-          Create Gist
+          <PlusCircle /> Create Gist
         </Link>
       </div>
 

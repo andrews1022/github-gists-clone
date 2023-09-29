@@ -7,7 +7,19 @@ import type { AuthOptions } from "next-auth";
 import { clientRoutes } from "@/constants/routes";
 
 const options: AuthOptions = {
+  // @ts-ignore
   adapter: DrizzleAdapter(db),
+  callbacks: {
+    async session({ session, user }) {
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          userId: user.id
+        }
+      };
+    }
+  },
   pages: {
     signIn: clientRoutes.signIn
   },

@@ -1,8 +1,8 @@
 import { getServerSession } from "next-auth";
 import Link from "next/link";
 
-import { options } from "@/next-auth/options";
 import { clientRoutes } from "@/constants/routes";
+import { options } from "@/next-auth/options";
 
 const HomePage = async () => {
   const session = await getServerSession(options);
@@ -19,6 +19,8 @@ const HomePage = async () => {
       >
         {session ? "View Gists" : "Sign In"}
       </Link>
+
+      {/* <pre>{JSON.stringify(session, null, 2)}</pre> */}
     </div>
   );
 };

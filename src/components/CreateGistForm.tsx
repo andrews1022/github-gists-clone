@@ -1,10 +1,10 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import CodeMirror from "@uiw/react-codemirror";
-import { githubLight } from "@uiw/codemirror-theme-github";
 import { PlusCircle } from "lucide-react";
 import { useForm } from "react-hook-form";
+import CodeMirror from "@uiw/react-codemirror";
+import { githubLight } from "@uiw/codemirror-theme-github";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+
 import { apiRoutes, clientRoutes } from "@/constants/routes";
 
 const fileNameAndExtensionRegex = /^[\w-]+\.[\w-]+$/;
@@ -53,13 +54,13 @@ const CreateGistForm = () => {
   });
 
   const handleSubmit = async (values: FormInputs) => {
-    const res = await fetch("/api/gists", {
+    const res = await fetch(apiRoutes.gists, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        fileName: values.fileNameAndExtension,
+        fileNameAndExtension: values.fileNameAndExtension,
         description: values.description,
         code: values.code
       })
@@ -80,7 +81,7 @@ const CreateGistForm = () => {
 
   return (
     <Form {...form}>
-      <form className="space-y-6" onSubmit={form.handleSubmit(handleSubmit)}>
+      <form className="mb-8 space-y-6" onSubmit={form.handleSubmit(handleSubmit)}>
         <FormField
           control={form.control}
           name="fileNameAndExtension"

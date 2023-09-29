@@ -1,6 +1,7 @@
-import { clientRoutes } from "@/constants/routes";
 import { Home } from "lucide-react";
 import Link from "next/link";
+
+import { clientRoutes } from "@/constants/routes";
 
 const RootNotFound = () => {
   return (
