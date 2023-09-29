@@ -33,7 +33,7 @@ const formSchema = z.object({
     .string()
     .min(1, "Description must be at least 1 character")
     .max(1000, "Description cannot be more than 1000 characters"),
-  code: z.string()
+  code: z.string().min(1, "Description must be at least 1 character")
 });
 
 const CreateGistForm = () => {

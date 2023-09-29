@@ -5,6 +5,89 @@ import { redirect } from "next/navigation";
 import { options } from "@/next-auth/options";
 import Link from "next/link";
 
+// import CodeHighlighter from "@/components/CodeHighlighter";
+
+// {
+//   "fileName": "useDebounce.ts",
+//   "description": "Reusable debounce hook",
+//   "code": "import { useEffect, useState } from 'react';\n\nexport const useDebounce = <T>(value: T, delay = 500) => {\n  const [debouncedValue, setDebouncedValue] = useState<T>(value);\n\n  useEffect(() => {\n    const timeout = setTimeout(() => {\n      setDebouncedValue(value);\n    }, delay);\n\n    return () => clearTimeout(timeout);\n  }, [value, delay]);\n\n  return debouncedValue;\n};"
+// }
+
+// const codeString = "(num) => num + 1";
+
+// const codeBlockTsx =
+//   "import { useEffect, useState } from 'react';\n\nexport const useDebounce = <T>(value: T, delay = 500) => {\n  const [debouncedValue, setDebouncedValue] = useState<T>(value);\n\n  useEffect(() => {\n    const timeout = setTimeout(() => {\n      setDebouncedValue(value);\n    }, delay);\n\n    return () => clearTimeout(timeout);\n  }, [value, delay]);\n\n  return debouncedValue;\n};";
+
+// const codeBlockCpp = "def hi(name): print('Hi ' + name + '!') return";
+
+// const supportedLanguages = [
+//   "javascript",
+//   "typescript",
+//   "jsx",
+//   "tsx",
+//   "swift",
+//   "kotlin",
+//   "objectivec",
+//   "js-extras",
+//   "reason",
+//   "rust",
+//   "graphql",
+//   "yaml",
+//   "go",
+//   "cpp",
+//   "markdown"
+// ];
+
+// const languageObjects = supportedLanguages.map((language) => {
+//   let fileExtension = "";
+//   // Determine file extension based on language
+//   switch (language) {
+//     case "javascript":
+//     case "jsx":
+//     case "js-extras":
+//       fileExtension = "js";
+//       break;
+//     case "typescript":
+//     case "tsx":
+//       fileExtension = "ts";
+//       break;
+//     case "swift":
+//       fileExtension = "swift";
+//       break;
+//     case "kotlin":
+//       fileExtension = "kt";
+//       break;
+//     case "objectivec":
+//       fileExtension = "m";
+//       break;
+//     case "reason":
+//       fileExtension = "re";
+//       break;
+//     case "rust":
+//       fileExtension = "rs";
+//       break;
+//     case "graphql":
+//       fileExtension = "graphql";
+//       break;
+//     case "yaml":
+//       fileExtension = "yaml";
+//       break;
+//     case "go":
+//       fileExtension = "go";
+//       break;
+//     case "cpp":
+//       fileExtension = "cpp";
+//       break;
+//     case "markdown":
+//       fileExtension = "md";
+//       break;
+//     default:
+//       fileExtension = "";
+//   }
+
+//   return { language, fileExtension };
+// });
+
 const GistsPage = async () => {
   const session = await getServerSession(options);
 
@@ -38,6 +121,8 @@ const GistsPage = async () => {
       </div>
 
       <p>GISTS WILL GO HERE</p>
+
+      {/* <CodeHighlighter code={codeBlockCpp} /> */}
     </div>
   );
 };
