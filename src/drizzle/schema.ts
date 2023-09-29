@@ -1,6 +1,5 @@
-import { timestamp, pgTable, text, primaryKey, integer, uuid, date } from "drizzle-orm/pg-core";
+import { timestamp, pgTable, text, primaryKey, integer, uuid } from "drizzle-orm/pg-core";
 import type { AdapterAccount } from "@auth/core/adapters";
-import { sql } from "drizzle-orm";
 
 export const users = pgTable("user", {
   id: text("id").notNull().primaryKey(),

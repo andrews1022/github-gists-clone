@@ -7,6 +7,14 @@ import { redirect } from "next/navigation";
 import { clientRoutes } from "@/constants/routes";
 import { options } from "@/next-auth/options";
 
+import { eq, lt, gte, ne, and, asc, desc } from "drizzle-orm";
+import { db } from "@/drizzle/config";
+import { gists, users } from "@/drizzle/schema";
+
+import * as schema from "@/drizzle/schema";
+import { drizzle } from "drizzle-orm/postgres-js";
+// import {gists } from "@/drizzle/schema";
+
 // import CodeHighlighter from "@/components/CodeHighlighter";
 
 // {
@@ -90,29 +98,74 @@ import { options } from "@/next-auth/options";
 //   return { language, fileExtension };
 // });
 
-const GistsPage = async () => {
-  const session = await getServerSession(options);
+const session = await getServerSession(options);
 
+const getGists = async () => {
   if (!session) {
     redirect(clientRoutes.signIn);
   }
 
   const { user } = session;
+  const { userId } = user;
+
+  // const jists = await db.select().from(gists).leftJoin(users, eq(users.id, userId!));
+  // const jists = await db.select().from(gists).where(eq(users.id, userId!));
+  // const jists = await db.select().from(gists).where(gists.userId.eq(userId))
+  // const jists = await db
+  //   .select()
+  //   .from(gists)
+  //   .where(eq(users.id, "72a403c0-b153-473f-bf20-ac6a12c82855"));
+
+  // const jists = await db.select().from([gists, users]).where(eq(users.id, "MY_USER_ID")).and(gists.userId.eq(users.id));
+
+  // const jists = await db
+  // .select()
+  // .from(gists)
+  // .where(gists.userId.in(
+  //   db.subquery()
+  //     .select(users.id)
+  //     .from(users)
+  //     .where(eq(users.id, "MY_USER_ID"))
+  // ));
+
+  // select all gists where the user id is equal to the user id of the current session
+  // const jists = await db.select().from(gists).where(gists.userId.eq(userId));
+  const jists = await db
+    .select()
+    .from(gists)
+    .where(eq(gists.userId, userId!))
+    .orderBy(desc(gists.createdAt));
+
+  // const jists = await db
+
+  // const client = db
+  // const drzDb = drizzle(client, { schema });
+
+  return jists;
+};
+
+const GistsPage = async () => {
+  if (!session) {
+    redirect(clientRoutes.signIn);
+  }
+
+  const jists = await getGists();
+  // console.log("jists: ", jists);
 
   return (
     <div>
       <div className="flex flex-col items-center gap-y-6">
-        {user?.image ? (
+        {session?.user?.image ? (
           <Image
             className="rounded-full"
-            src={user.image}
-            alt={`${user.name}'s GitHub avatar`}
+            src={session.user.image}
+            alt={`${session.user.name}'s GitHub avatar`}
             height={175}
             width={175}
           />
         ) : null}
 
-        <h1 className="text-5xl">{user?.name}'s Gists</h1>
+        <h1 className="text-5xl">{session?.user?.name}'s Gists</h1>
 
         <Link
           className="border-2 border-emerald-600 text-emerald-600 text-2xl py-2 px-12 rounded-lg hover:bg-emerald-600 hover:text-white transition-colors flex items-center gap-x-2"
@@ -122,7 +175,13 @@ const GistsPage = async () => {
         </Link>
       </div>
 
-      <p>GISTS WILL GO HERE</p>
+      {jists.length
+        ? jists.map((jist) => (
+            <div key={jist.gistId} id={jist.gistId}>
+              <h2>{jist.fileNameAndExtension}</h2>
+            </div>
+          ))
+        : null}
 
       {/* <CodeHighlighter code={codeBlockCpp} /> */}
     </div>

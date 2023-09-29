@@ -1,10 +1,10 @@
 import { DrizzleAdapter } from "@auth/drizzle-adapter";
 import GitHubProvider from "next-auth/providers/github";
 
+import { clientRoutes } from "@/constants/routes";
 import { db } from "@/drizzle/config";
 
 import type { AuthOptions } from "next-auth";
-import { clientRoutes } from "@/constants/routes";
 
 const options: AuthOptions = {
   // @ts-ignore
