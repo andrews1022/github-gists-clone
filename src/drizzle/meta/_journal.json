@@ -78,6 +78,13 @@
       "when": 1695948703229,
       "tag": "0010_old_klaw",
       "breakpoints": true
+    },
+    {
+      "idx": 11,
+      "version": "5",
+      "when": 1695968506685,
+      "tag": "0011_smart_ultron",
+      "breakpoints": true
     }
   ]
 }
