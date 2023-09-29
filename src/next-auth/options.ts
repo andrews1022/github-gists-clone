@@ -4,11 +4,12 @@ import GitHubProvider from "next-auth/providers/github";
 import { db } from "@/drizzle/config";
 
 import type { AuthOptions } from "next-auth";
+import { clientRoutes } from "@/constants/routes";
 
 const options: AuthOptions = {
   adapter: DrizzleAdapter(db),
   pages: {
-    signIn: "/sign-in"
+    signIn: clientRoutes.signIn
   },
   providers: [
     GitHubProvider({

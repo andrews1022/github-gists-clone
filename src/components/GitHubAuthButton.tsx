@@ -4,6 +4,7 @@ import { Github } from "lucide-react";
 import { signIn } from "next-auth/react";
 
 import { Button } from "@/components/ui/button";
+import { clientRoutes } from "@/constants/routes";
 
 type GitHubAuthButtonProps = {
   text: "in" | "up";
@@ -11,7 +12,7 @@ type GitHubAuthButtonProps = {
 
 const GitHubAuthButton = ({ text }: GitHubAuthButtonProps) => {
   const handleClick = () => {
-    signIn("github", { callbackUrl: "/gists" });
+    signIn("github", { callbackUrl: clientRoutes.gists });
   };
 
   return (

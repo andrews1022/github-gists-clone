@@ -4,12 +4,13 @@ import { redirect } from "next/navigation";
 
 import { GitHubAuthButton } from "@/components/GitHubAuthButton";
 import { options } from "@/next-auth/options";
+import { clientRoutes } from "@/constants/routes";
 
 const SignUpPage = async () => {
   const session = await getServerSession(options);
 
   if (session) {
-    redirect("/");
+    redirect(clientRoutes.root);
   }
 
   return (
@@ -23,7 +24,7 @@ const SignUpPage = async () => {
 
         <p className="text-center text-sm text-gray-600">
           If you do have an account, please{" "}
-          <Link className="text-blue-500 hover:underline" href="/sign-in">
+          <Link className="text-blue-500 hover:underline" href={clientRoutes.signIn}>
             Sign in
           </Link>
           .

@@ -1,3 +1,4 @@
+import { clientRoutes } from "@/constants/routes";
 import { Home } from "lucide-react";
 import Link from "next/link";
 
@@ -10,7 +11,7 @@ const RootNotFound = () => {
 
       <Link
         className="border-2 border-gray-800 text-2xl py-2 px-12 rounded-lg hover:bg-gray-800 hover:text-white transition-colors flex items-center gap-x-2"
-        href="/"
+        href={clientRoutes.root}
       >
         <Home /> Go Home
       </Link>

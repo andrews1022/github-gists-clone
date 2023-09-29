@@ -1,5 +1,6 @@
 "use client";
 
+import { useRouter } from "next/navigation";
 import CodeMirror from "@uiw/react-codemirror";
 import { githubLight } from "@uiw/codemirror-theme-github";
 import { PlusCircle } from "lucide-react";
@@ -17,6 +18,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { apiRoutes, clientRoutes } from "@/constants/routes";
 
 const fileNameAndExtensionRegex = /^[\w-]+\.[\w-]+$/;
 
@@ -36,8 +38,12 @@ const formSchema = z.object({
   code: z.string().min(1, "Description must be at least 1 character")
 });
 
+type FormInputs = z.infer<typeof formSchema>;
+
 const CreateGistForm = () => {
-  const form = useForm<z.infer<typeof formSchema>>({
+  const router = useRouter();
+
+  const form = useForm<FormInputs>({
     resolver: zodResolver(formSchema),
     defaultValues: {
       fileName: "",
@@ -46,8 +52,31 @@ const CreateGistForm = () => {
     }
   });
 
-  const handleSubmit = (values: z.infer<typeof formSchema>) => {
-    console.log(values);
+  const handleSubmit = async (values: FormInputs) => {
+    const res = await fetch("/api/gists", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        fileName: values.fileName,
+        description: values.description,
+        code: values.code,
+        createdAt: new Date()
+      })
+    });
+
+    if (res.ok) {
+      router.push(clientRoutes.gists);
+    } else {
+      const text = await res.text(); // get the response body for more information
+
+      throw new Error(`
+        Failed to fetch data
+        Status: ${res.status}
+        Response: ${text}
+      `);
+    }
   };
 
   return (

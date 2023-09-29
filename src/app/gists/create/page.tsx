@@ -2,13 +2,14 @@ import { ArrowLeftCircle } from "lucide-react";
 import Link from "next/link";
 
 import { CreateGistForm } from "@/components/CreateGistForm";
+import { clientRoutes } from "@/constants/routes";
 
 const CreateGistPage = () => {
   return (
     <div>
       <Link
         className="border-2 border-gray-800 text-1xl py-1.5 px-6 rounded-lg hover:bg-gray-800 hover:text-white transition-colors inline-flex items-center gap-x-2"
-        href="/gists"
+        href={clientRoutes.gists}
       >
         <ArrowLeftCircle /> Go Back
       </Link>

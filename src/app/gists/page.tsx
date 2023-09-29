@@ -4,6 +4,7 @@ import { redirect } from "next/navigation";
 
 import { options } from "@/next-auth/options";
 import Link from "next/link";
+import { clientRoutes } from "@/constants/routes";
 
 // import CodeHighlighter from "@/components/CodeHighlighter";
 
@@ -92,7 +93,7 @@ const GistsPage = async () => {
   const session = await getServerSession(options);
 
   if (!session) {
-    redirect("/sign-in");
+    redirect(clientRoutes.signIn);
   }
 
   const { user } = session;
@@ -114,7 +115,7 @@ const GistsPage = async () => {
 
         <Link
           className="border-2 border-emerald-600 text-emerald-600 text-2xl py-2 px-12 rounded-lg hover:bg-emerald-600 hover:text-white transition-colors"
-          href="/gists/create"
+          href={clientRoutes.createGist}
         >
           Create Gist
         </Link>

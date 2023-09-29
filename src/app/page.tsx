@@ -2,6 +2,7 @@ import { getServerSession } from "next-auth";
 import Link from "next/link";
 
 import { options } from "@/next-auth/options";
+import { clientRoutes } from "@/constants/routes";
 
 const HomePage = async () => {
   const session = await getServerSession(options);
@@ -14,7 +15,7 @@ const HomePage = async () => {
 
       <Link
         className="border-2 border-gray-800 text-2xl py-2 px-12 rounded-lg hover:bg-gray-800 hover:text-white transition-colors"
-        href={session ? "/gists" : "/sign-in"}
+        href={session ? clientRoutes.gists : clientRoutes.signIn}
       >
         {session ? "View Gists" : "Sign In"}
       </Link>
