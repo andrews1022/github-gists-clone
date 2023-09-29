@@ -56,7 +56,7 @@ export const gists = pgTable("gist", {
   userId: text("userId")
     .notNull()
     .references(() => users.id, { onDelete: "cascade" }),
-  fileNameAndExtension: text("fileNameAndExtension").notNull(),
+  fileNameAndExtension: text("fileNameAndExtension").notNull().unique(),
   description: text("description"),
   code: text("code").notNull(),
   createdAt: timestamp("createdAt").defaultNow(),

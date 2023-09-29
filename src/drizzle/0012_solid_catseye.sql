@@ -1,0 +1,1 @@
+ALTER TABLE "gist" ADD CONSTRAINT "gist_fileNameAndExtension_unique" UNIQUE("fileNameAndExtension");

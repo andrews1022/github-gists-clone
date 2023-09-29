@@ -11,6 +11,16 @@ import { desc, eq } from "drizzle-orm";
 import { db } from "@/drizzle/config";
 import { gists } from "@/drizzle/schema";
 
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle
+} from "@/components/ui/card";
+import { CodeHighlighter } from "@/components/CodeHighlighter";
+
 // const supportedLanguages = [
 //   "javascript",
 //   "typescript",
@@ -129,15 +139,29 @@ const GistsPage = async () => {
         </Link>
       </div>
 
-      {gists.length
-        ? gists.map((gist) => (
-            <div key={gist.gistId} id={gist.gistId}>
-              <h2>{gist.fileNameAndExtension}</h2>
-            </div>
-          ))
-        : null}
+      <div className="grid gap-6 grid-cols-4 mt-8">
+        {gists.length
+          ? gists.map((gist) => (
+              <Card key={gist.gistId} className="col-span-full lg:col-span-2">
+                <CardHeader>
+                  <CardTitle>{gist.fileNameAndExtension}</CardTitle>
+                  <CardDescription>{gist.description}</CardDescription>
+                </CardHeader>
 
-      {/* <CodeHighlighter code={codeBlockCpp} /> */}
+                <CardContent>
+                  <CodeHighlighter
+                    code={gist.code}
+                    fileNameAndExtension={gist.fileNameAndExtension}
+                  />
+                </CardContent>
+
+                <CardFooter>
+                  <Link href={`/gists/${gist.gistId}`}>View Gist</Link>
+                </CardFooter>
+              </Card>
+            ))
+          : null}
+      </div>
     </div>
   );
 };

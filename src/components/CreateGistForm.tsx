@@ -81,7 +81,7 @@ const CreateGistForm = () => {
 
   return (
     <Form {...form}>
-      <form className="mb-8 space-y-6" onSubmit={form.handleSubmit(handleSubmit)}>
+      <form className="space-y-6" onSubmit={form.handleSubmit(handleSubmit)}>
         <FormField
           control={form.control}
           name="fileNameAndExtension"

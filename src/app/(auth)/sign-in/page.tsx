@@ -5,7 +5,6 @@ import { redirect } from "next/navigation";
 import { GitHubAuthButton } from "@/components/GitHubAuthButton";
 import { options } from "@/next-auth/options";
 import { clientRoutes } from "@/constants/routes";
-import { DetectSignInError } from "@/components/DetectSignInError";
 
 const SignInPage = async () => {
   const session = await getServerSession(options);
@@ -31,8 +30,6 @@ const SignInPage = async () => {
           .
         </p>
       </div>
-
-      <DetectSignInError />
     </div>
   );
 };

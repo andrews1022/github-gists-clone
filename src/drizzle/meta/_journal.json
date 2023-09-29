@@ -85,6 +85,13 @@
       "when": 1695968506685,
       "tag": "0011_smart_ultron",
       "breakpoints": true
+    },
+    {
+      "idx": 12,
+      "version": "5",
+      "when": 1696028024432,
+      "tag": "0012_solid_catseye",
+      "breakpoints": true
     }
   ]
 }
