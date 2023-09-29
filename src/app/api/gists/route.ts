@@ -24,6 +24,7 @@ const gistSchema = z.object({
   code: z.string().min(1, "Description must be at least 1 character")
 });
 
+// add data to supabase postgres database
 export const POST = async (request: NextRequest) => {
   try {
     const body = await request.json();

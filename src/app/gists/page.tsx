@@ -7,28 +7,9 @@ import { redirect } from "next/navigation";
 import { clientRoutes } from "@/constants/routes";
 import { options } from "@/next-auth/options";
 
-import { eq, lt, gte, ne, and, asc, desc } from "drizzle-orm";
+import { desc, eq } from "drizzle-orm";
 import { db } from "@/drizzle/config";
-import { gists, users } from "@/drizzle/schema";
-
-import * as schema from "@/drizzle/schema";
-import { drizzle } from "drizzle-orm/postgres-js";
-// import {gists } from "@/drizzle/schema";
-
-// import CodeHighlighter from "@/components/CodeHighlighter";
-
-// {
-//   "fileName": "useDebounce.ts",
-//   "description": "Reusable debounce hook",
-//   "code": "import { useEffect, useState } from 'react';\n\nexport const useDebounce = <T>(value: T, delay = 500) => {\n  const [debouncedValue, setDebouncedValue] = useState<T>(value);\n\n  useEffect(() => {\n    const timeout = setTimeout(() => {\n      setDebouncedValue(value);\n    }, delay);\n\n    return () => clearTimeout(timeout);\n  }, [value, delay]);\n\n  return debouncedValue;\n};"
-// }
-
-// const codeString = "(num) => num + 1";
-
-// const codeBlockTsx =
-//   "import { useEffect, useState } from 'react';\n\nexport const useDebounce = <T>(value: T, delay = 500) => {\n  const [debouncedValue, setDebouncedValue] = useState<T>(value);\n\n  useEffect(() => {\n    const timeout = setTimeout(() => {\n      setDebouncedValue(value);\n    }, delay);\n\n    return () => clearTimeout(timeout);\n  }, [value, delay]);\n\n  return debouncedValue;\n};";
-
-// const codeBlockCpp = "def hi(name): print('Hi ' + name + '!') return";
+import { gists } from "@/drizzle/schema";
 
 // const supportedLanguages = [
 //   "javascript",
@@ -108,38 +89,11 @@ const getGists = async () => {
   const { user } = session;
   const { userId } = user;
 
-  // const jists = await db.select().from(gists).leftJoin(users, eq(users.id, userId!));
-  // const jists = await db.select().from(gists).where(eq(users.id, userId!));
-  // const jists = await db.select().from(gists).where(gists.userId.eq(userId))
-  // const jists = await db
-  //   .select()
-  //   .from(gists)
-  //   .where(eq(users.id, "72a403c0-b153-473f-bf20-ac6a12c82855"));
-
-  // const jists = await db.select().from([gists, users]).where(eq(users.id, "MY_USER_ID")).and(gists.userId.eq(users.id));
-
-  // const jists = await db
-  // .select()
-  // .from(gists)
-  // .where(gists.userId.in(
-  //   db.subquery()
-  //     .select(users.id)
-  //     .from(users)
-  //     .where(eq(users.id, "MY_USER_ID"))
-  // ));
-
-  // select all gists where the user id is equal to the user id of the current session
-  // const jists = await db.select().from(gists).where(gists.userId.eq(userId));
   const jists = await db
     .select()
     .from(gists)
     .where(eq(gists.userId, userId!))
     .orderBy(desc(gists.createdAt));
-
-  // const jists = await db
-
-  // const client = db
-  // const drzDb = drizzle(client, { schema });
 
   return jists;
 };
@@ -149,7 +103,7 @@ const GistsPage = async () => {
     redirect(clientRoutes.signIn);
   }
 
-  const jists = await getGists();
+  const gists = await getGists();
   // console.log("jists: ", jists);
 
   return (
@@ -175,10 +129,10 @@ const GistsPage = async () => {
         </Link>
       </div>
 
-      {jists.length
-        ? jists.map((jist) => (
-            <div key={jist.gistId} id={jist.gistId}>
-              <h2>{jist.fileNameAndExtension}</h2>
+      {gists.length
+        ? gists.map((gist) => (
+            <div key={gist.gistId} id={gist.gistId}>
+              <h2>{gist.fileNameAndExtension}</h2>
             </div>
           ))
         : null}
