@@ -46,13 +46,12 @@ export const POST = async (request: NextRequest) => {
 
     // console.log("user: ", session?.user);
 
-    // const newGist = await db.insert(gists).values({
-    //   name: "name goes here",
-    //   description: "description goes here",
-    //   code: "code goes here",
-    //   createdAt: "createdAt goes here",
-    //   userId: "userId goes here"
-    // });
+    const newGist = await db.insert(gists).values({
+      userId: "userId goes here",
+      fileNameAndExtension: "name goes here",
+      description: "description goes here",
+      code: "code goes here"
+    });
 
     return NextResponse.json(
       {

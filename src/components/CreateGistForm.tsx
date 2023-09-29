@@ -23,7 +23,7 @@ import { apiRoutes, clientRoutes } from "@/constants/routes";
 const fileNameAndExtensionRegex = /^[\w-]+\.[\w-]+$/;
 
 const formSchema = z.object({
-  fileName: z
+  fileNameAndExtension: z
     .string()
     .min(1, "Name must be at least 1 character")
     .max(100, "Name cannot be more than 100 characters")
@@ -46,7 +46,7 @@ const CreateGistForm = () => {
   const form = useForm<FormInputs>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      fileName: "",
+      fileNameAndExtension: "",
       description: "",
       code: ""
     }
@@ -59,10 +59,9 @@ const CreateGistForm = () => {
         "Content-Type": "application/json"
       },
       body: JSON.stringify({
-        fileName: values.fileName,
+        fileName: values.fileNameAndExtension,
         description: values.description,
-        code: values.code,
-        createdAt: new Date()
+        code: values.code
       })
     });
 
@@ -84,7 +83,7 @@ const CreateGistForm = () => {
       <form className="space-y-6" onSubmit={form.handleSubmit(handleSubmit)}>
         <FormField
           control={form.control}
-          name="fileName"
+          name="fileNameAndExtension"
           render={({ field }) => (
             <FormItem>
               <FormLabel className="text-xl">Name + Extension</FormLabel>
