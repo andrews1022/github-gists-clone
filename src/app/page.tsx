@@ -3,6 +3,7 @@ import Link from "next/link";
 
 import { clientRoutes } from "@/constants/routes";
 import { options } from "@/next-auth/options";
+import { Code, LogIn } from "lucide-react";
 
 const HomePage = async () => {
   const session = await getServerSession(options);
@@ -14,10 +15,18 @@ const HomePage = async () => {
       <p className="text-xl">A simple site to display, create, and manage your gists.</p>
 
       <Link
-        className="border-2 border-gray-800 text-2xl py-2 px-12 rounded-lg hover:bg-gray-800 hover:text-white transition-colors"
+        className="border-2 border-gray-800 text-2xl py-2 px-12 rounded-lg hover:bg-gray-800 hover:text-white transition-colors flex items-center gap-x-2"
         href={session ? clientRoutes.gists : clientRoutes.signIn}
       >
-        {session ? "View Gists" : "Sign In"}
+        {session ? (
+          <>
+            <Code /> <span>View Gists</span>
+          </>
+        ) : (
+          <>
+            <LogIn /> <span>Sign In</span>
+          </>
+        )}
       </Link>
 
       {/* <pre>{JSON.stringify(session, null, 2)}</pre> */}

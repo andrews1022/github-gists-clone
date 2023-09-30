@@ -3,7 +3,6 @@
 import { Github } from "lucide-react";
 import { signIn } from "next-auth/react";
 
-import { Button } from "@/components/ui/button";
 import { clientRoutes } from "@/constants/routes";
 
 type GitHubAuthButtonProps = {
@@ -16,9 +15,13 @@ const GitHubAuthButton = ({ text }: GitHubAuthButtonProps) => {
   };
 
   return (
-    <Button onClick={handleClick} className="flex gap-x-2 mx-auto w-3/4">
+    <button
+      className="border-2 border-gray-800 text-2xl py-2 px-12 rounded-lg hover:bg-gray-800 hover:text-white transition-colors items-center flex gap-x-2 mx-auto"
+      onClick={handleClick}
+      type="button"
+    >
       <Github /> <span>Sign {text} with GitHub</span>
-    </Button>
+    </button>
   );
 };
 

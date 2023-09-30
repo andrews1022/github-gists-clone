@@ -15,7 +15,15 @@ const CodeHighlighter = ({ code, fileNameAndExtension }: CodeHighlighterProps) =
     <Highlight theme={themes.oneLight} code={code} language="tsx">
       {({ className, style, tokens, getLineProps, getTokenProps }) => (
         <pre style={style} className="p-4 overflow-x-scroll rounded-lg">
-          {tokens.slice(0, MAX_NUMBER_OF_LINES).map((line, i) => (
+          {tokens.length < MAX_NUMBER_OF_LINES && <p>Add extra lines to get up to 10</p>}
+
+          {tokens.length > MAX_NUMBER_OF_LINES && (
+            <p>Remove {tokens.length - MAX_NUMBER_OF_LINES} lines</p>
+          )}
+
+          {tokens.length === MAX_NUMBER_OF_LINES && <p>Perfect!</p>}
+
+          {/* {tokens.slice(0, MAX_NUMBER_OF_LINES).map((line, i) => (
             <div key={i} {...getLineProps({ line })} className="hi">
               <span className="1">{i + 1}</span>
               {line.map((token, index) => (
@@ -26,9 +34,9 @@ const CodeHighlighter = ({ code, fileNameAndExtension }: CodeHighlighterProps) =
                 />
               ))}
             </div>
-          ))}
+          ))} */}
 
-          {tokens.length < MAX_NUMBER_OF_LINES ? (
+          {/* {tokens.length < MAX_NUMBER_OF_LINES ? (
             <>
               {Array.from({ length: MAX_NUMBER_OF_LINES - tokens.length }).map((_, index) => (
                 <div key={index} className="hi">
@@ -36,7 +44,7 @@ const CodeHighlighter = ({ code, fileNameAndExtension }: CodeHighlighterProps) =
                 </div>
               ))}
             </>
-          ) : null}
+          ) : null} */}
 
           {/* {tokens.length < MAX_NUMBER_OF_LINES ? (
             <div>

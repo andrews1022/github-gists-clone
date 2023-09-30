@@ -17,7 +17,7 @@ const SignInPage = async () => {
     <div className="flex flex-col items-center">
       <h1 className="text-7xl">Sign In</h1>
 
-      <div className="bg-gray-100 rounded-lg mt-5 p-7 w-96 flex flex-col gap-y-4">
+      <div className="bg-gray-100 rounded-lg mt-5 p-7 w-2/4 flex flex-col gap-y-4">
         <GitHubAuthButton text="in" />
 
         <div className="bg-gray-400 h-px w-1/2 mx-auto" />

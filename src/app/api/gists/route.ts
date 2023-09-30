@@ -5,6 +5,7 @@ import { db } from "@/drizzle/config";
 import { gists } from "@/drizzle/schema";
 import { getServerSession } from "next-auth";
 import { options } from "@/next-auth/options";
+import { revalidatePath } from "next/cache";
 
 const fileNameAndExtensionRegex = /^[\w-]+\.[\w-]+$/;
 

@@ -1,4 +1,4 @@
-import { PlusCircle } from "lucide-react";
+import { Code, PlusCircle } from "lucide-react";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
@@ -156,7 +156,12 @@ const GistsPage = async () => {
                 </CardContent>
 
                 <CardFooter>
-                  <Link href={`/gists/${gist.gistId}`}>View Gist</Link>
+                  <Link
+                    className="border-2 border-gray-800 text-1xl py-1.5 px-6 rounded-lg hover:bg-gray-800 hover:text-white transition-colors flex items-center gap-x-2"
+                    href={`/gists/${gist.gistId}`}
+                  >
+                    <Code /> View Gist
+                  </Link>
                 </CardFooter>
               </Card>
             ))
