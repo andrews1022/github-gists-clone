@@ -1,11 +1,13 @@
 import { drizzle } from "drizzle-orm/postgres-js";
-import { ArrowLeftCircle } from "lucide-react";
+import { ArrowLeftCircle, FileEdit } from "lucide-react";
 import Link from "next/link";
 
 import { clientRoutes } from "@/constants/routes";
 import { client } from "@/drizzle/config";
 import * as schema from "@/drizzle/schema";
+
 import { CodeHighlighterFull } from "@/components/CodeHighlighterFull";
+import { DeleteGistButton } from "@/components/DeleteGistButton";
 
 const db = drizzle(client, { schema });
 
@@ -29,7 +31,7 @@ const IndividualGistPage = async ({ params }: IndividualGistPageProps) => {
   return (
     <div>
       <Link
-        className="border-2 border-gray-800 text-1xl py-1.5 px-6 rounded-lg hover:bg-gray-800 hover:text-white transition-colors inline-flex items-center gap-x-2"
+        className="border-2 border-gray-800 text-gray-800 text-1xl py-1.5 px-6 rounded-lg hover:bg-gray-800 hover:text-white transition-colors inline-flex items-center gap-x-2"
         href={clientRoutes.gists}
       >
         <ArrowLeftCircle /> Go Back
@@ -45,6 +47,17 @@ const IndividualGistPage = async ({ params }: IndividualGistPageProps) => {
             <CodeHighlighterFull code={gist.code} />
           </>
         ) : null}
+      </div>
+
+      <div className="flex items-center justify-center gap-x-10 mt-10 mx-auto w-3/4">
+        <Link
+          className="border-2 border-sky-600 text-sky-600 text-1xl py-1.5 px-6 rounded-lg hover:bg-sky-600 hover:text-white transition-colors flex items-center gap-x-2"
+          href={`/gists/${params.id}/edit`}
+        >
+          <FileEdit /> Edit this gist
+        </Link>
+
+        <DeleteGistButton />
       </div>
     </div>
   );
