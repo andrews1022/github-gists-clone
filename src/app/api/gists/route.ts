@@ -1,3 +1,4 @@
+import { eq } from "drizzle-orm";
 import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
@@ -27,6 +28,8 @@ const gistSchema = z.object({
     .max(1000, "Description cannot be more than 1000 characters"),
   code: z.string().min(1, "Description must be at least 1 character")
 });
+
+export const revalidate = 0;
 
 // add data to supabase postgres database
 export const POST = async (request: NextRequest) => {
@@ -80,6 +83,60 @@ export const POST = async (request: NextRequest) => {
       );
     }
   } catch (error) {
+    return NextResponse.json(
+      {
+        message: "Something went wrong!"
+      },
+      {
+        status: 500
+      }
+    );
+  }
+};
+
+export const DELETE = async (request: NextRequest) => {
+  try {
+    const { gistId } = await request.json();
+
+    const existingGist = await db.query.gists.findFirst({
+      where: (gists, { eq }) => eq(gists.gistId, gistId)
+    });
+
+    if (!existingGist) {
+      return NextResponse.json(
+        {
+          message: "Gist not found. Nothing has been deleted."
+        },
+        {
+          status: 404
+        }
+      );
+    }
+
+    // delete the gist
+    const deleted = await db.delete(gists).where(eq(gists.gistId, gistId));
+
+    // if the delete query fails, return a 500 error
+    if (!deleted) {
+      return NextResponse.json(
+        {
+          message: "Something went wrong!"
+        },
+        {
+          status: 500
+        }
+      );
+    }
+
+    // if the delete query succeeds, revalidate the gists path and return a 204 response
+    revalidatePath(clientRoutes.gists);
+
+    return NextResponse.json({ status: 204 });
+  } catch (error) {
+    // log the error
+    console.error(error);
+
+    // return a 500 error
     return NextResponse.json(
       {
         message: "Something went wrong!"
