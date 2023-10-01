@@ -6,4 +6,8 @@ const cn = (...inputs: ClassValue[]) => {
   return twMerge(clsx(inputs));
 };
 
-export { cn };
+const getIso8601Date = () => {
+  return new Date().toISOString().replace("T", " ").replace("Z", "");
+};
+
+export { cn, getIso8601Date };

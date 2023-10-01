@@ -56,40 +56,41 @@ const EditGistForm = ({ gist }: EditGistFormProps) => {
   const form = useForm<FormInputs>({
     resolver: zodResolver(formSchema),
     defaultValues: {
-      fileNameAndExtension: "",
-      description: "",
-      code: ""
+      fileNameAndExtension: gist?.fileNameAndExtension || "",
+      description: gist?.description || "",
+      code: gist?.code || ""
     }
   });
 
   const handleUpdateGist = async (values: FormInputs) => {
     setIsLoading(true);
 
-    // const res = await fetch(apiRoutes.gists, {
-    //   method: "POST",
-    //   headers: {
-    //     "Content-Type": "application/json"
-    //   },
-    //   body: JSON.stringify({
-    //     fileNameAndExtension: values.fileNameAndExtension,
-    //     description: values.description,
-    //     code: values.code
-    //   })
-    // });
+    const res = await fetch(apiRoutes.gists, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        fileNameAndExtension: values.fileNameAndExtension,
+        description: values.description,
+        code: values.code,
+        gistId: gist?.gistId
+      })
+    });
 
-    // if (res.ok) {
-    //   setIsLoading(false);
-    //   router.push(clientRoutes.gists);
-    // } else {
-    //   setIsLoading(false);
-    //   const { message } = await res.json();
+    if (res.ok) {
+      setIsLoading(false);
+      router.push(clientRoutes.gists);
+    } else {
+      setIsLoading(false);
+      const { message } = await res.json();
 
-    //   toast({
-    //     description: message,
-    //     title: "Uh oh! Something went wrong.",
-    //     variant: "destructive"
-    //   });
-    // }
+      toast({
+        description: message,
+        title: "Uh oh! Something went wrong.",
+        variant: "destructive"
+      });
+    }
   };
 
   return (
@@ -103,11 +104,11 @@ const EditGistForm = ({ gist }: EditGistFormProps) => {
               <FormLabel className="text-xl">Name + Extension</FormLabel>
               <FormControl>
                 <Input
-                  {...field}
                   className="text-base"
+                  onChange={field.onChange}
                   placeholder="useMyCustomHook.ts"
                   type="text"
-                  value={gist?.fileNameAndExtension || ""}
+                  value={field.value}
                 />
               </FormControl>
               <FormMessage />
@@ -123,10 +124,10 @@ const EditGistForm = ({ gist }: EditGistFormProps) => {
               <FormLabel className="text-xl">Description</FormLabel>
               <FormControl>
                 <Textarea
-                  {...field}
                   className="resize-none text-base"
+                  onChange={field.onChange}
                   placeholder="Describe your gist..."
-                  value={gist?.description || ""}
+                  value={field.value}
                 />
               </FormControl>
               <FormMessage />
@@ -147,7 +148,7 @@ const EditGistForm = ({ gist }: EditGistFormProps) => {
                     height="25vw"
                     onChange={field.onChange}
                     theme={githubLight}
-                    value={gist?.code || ""}
+                    value={field.value}
                   />
                 </FormControl>
                 <FormMessage />
