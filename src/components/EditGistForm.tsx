@@ -22,6 +22,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
 import { apiRoutes, clientRoutes } from "@/constants/routes";
+import { Gist } from "@/types";
 
 const fileNameAndExtensionRegex = /^[\w-]+\.[\w-]+$/;
 
@@ -43,7 +44,11 @@ const formSchema = z.object({
 
 type FormInputs = z.infer<typeof formSchema>;
 
-const EditGistForm = () => {
+type EditGistFormProps = {
+  gist: Gist | undefined | null;
+};
+
+const EditGistForm = ({ gist }: EditGistFormProps) => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
@@ -98,10 +103,11 @@ const EditGistForm = () => {
               <FormLabel className="text-xl">Name + Extension</FormLabel>
               <FormControl>
                 <Input
+                  {...field}
                   className="text-base"
                   placeholder="useMyCustomHook.ts"
                   type="text"
-                  {...field}
+                  value={gist?.fileNameAndExtension || ""}
                 />
               </FormControl>
               <FormMessage />
@@ -117,9 +123,10 @@ const EditGistForm = () => {
               <FormLabel className="text-xl">Description</FormLabel>
               <FormControl>
                 <Textarea
+                  {...field}
                   className="resize-none text-base"
                   placeholder="Describe your gist..."
-                  {...field}
+                  value={gist?.description || ""}
                 />
               </FormControl>
               <FormMessage />
@@ -136,11 +143,11 @@ const EditGistForm = () => {
                 <FormLabel className="text-xl">Code</FormLabel>
                 <FormControl>
                   <CodeMirror
-                    value={field.value}
-                    onChange={field.onChange}
-                    height="25vw"
-                    theme={githubLight}
                     className="rounded-md text-base border border-input"
+                    height="25vw"
+                    onChange={field.onChange}
+                    theme={githubLight}
+                    value={gist?.code || ""}
                   />
                 </FormControl>
                 <FormMessage />

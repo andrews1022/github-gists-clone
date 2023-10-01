@@ -100,10 +100,10 @@ const CreateGistForm = () => {
               <FormLabel className="text-xl">Name + Extension</FormLabel>
               <FormControl>
                 <Input
+                  {...field}
                   className="text-base"
                   placeholder="useMyCustomHook.ts"
                   type="text"
-                  {...field}
                 />
               </FormControl>
               <FormMessage />
@@ -119,9 +119,9 @@ const CreateGistForm = () => {
               <FormLabel className="text-xl">Description</FormLabel>
               <FormControl>
                 <Textarea
+                  {...field}
                   className="resize-none text-base"
                   placeholder="Describe your gist..."
-                  {...field}
                 />
               </FormControl>
               <FormMessage />
@@ -138,11 +138,11 @@ const CreateGistForm = () => {
                 <FormLabel className="text-xl">Code</FormLabel>
                 <FormControl>
                   <CodeMirror
-                    value={field.value}
-                    onChange={field.onChange}
-                    height="25vw"
-                    theme={githubLight}
                     className="rounded-md text-base border border-input"
+                    height="25vw"
+                    onChange={field.onChange}
+                    theme={githubLight}
+                    value={field.value}
                   />
                 </FormControl>
                 <FormMessage />

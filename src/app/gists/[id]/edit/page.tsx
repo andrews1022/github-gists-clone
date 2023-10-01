@@ -25,7 +25,7 @@ const EditIndividualGistPage = async ({ params }: EditIndividualGistPageProps) =
 
       <h1 className="mt-6 text-center text-4xl">Edit {gist?.fileNameAndExtension}</h1>
 
-      <EditGistForm />
+      <EditGistForm gist={gist} />
     </div>
   );
 };
