@@ -18,6 +18,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
+import { useToast } from "@/components/ui/use-toast";
 
 import { apiRoutes, clientRoutes } from "@/constants/routes";
 
@@ -43,6 +44,7 @@ type FormInputs = z.infer<typeof formSchema>;
 
 const CreateGistForm = () => {
   const router = useRouter();
+  const { toast } = useToast();
 
   const form = useForm<FormInputs>({
     resolver: zodResolver(formSchema),
@@ -69,13 +71,13 @@ const CreateGistForm = () => {
     if (res.ok) {
       router.push(clientRoutes.gists);
     } else {
-      const text = await res.text(); // get the response body for more information
+      const { message } = await res.json();
 
-      throw new Error(`
-        Failed to fetch data
-        Status: ${res.status}
-        Response: ${text}
-      `);
+      toast({
+        description: message,
+        title: "Uh oh! Something went wrong.",
+        variant: "destructive"
+      });
     }
   };
 

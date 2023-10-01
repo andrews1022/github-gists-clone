@@ -1,11 +1,14 @@
+import { getServerSession } from "next-auth";
+import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 import { z } from "zod";
 
+import { clientRoutes } from "@/constants/routes";
+
 import { db } from "@/drizzle/config";
 import { gists } from "@/drizzle/schema";
-import { getServerSession } from "next-auth";
+
 import { options } from "@/next-auth/options";
-import { revalidatePath } from "next/cache";
 
 const fileNameAndExtensionRegex = /^[\w-]+\.[\w-]+$/;
 
@@ -36,6 +39,24 @@ export const POST = async (request: NextRequest) => {
     const session = await getServerSession(options);
 
     if (session?.user) {
+      // check if a gist with the same file name and extension already exists in the database
+      const existingGist = await db.query.gists.findFirst({
+        where: (gists, { eq }) => eq(gists.fileNameAndExtension, fileNameAndExtension)
+      });
+
+      if (existingGist) {
+        return NextResponse.json(
+          {
+            message:
+              "A gist with that file name and extension already exists. Please enter a different one."
+          },
+          {
+            status: 409
+          }
+        );
+      }
+
+      // insert the new gist into the database
       const newGist = await db.insert(gists).values({
         userId: session.user.userId!,
         fileNameAndExtension,
@@ -43,10 +64,15 @@ export const POST = async (request: NextRequest) => {
         code
       });
 
+      // revalidate the cache for the gists page
+      revalidatePath(clientRoutes.gists);
+
       return NextResponse.json(
         {
           newGist,
-          message: "User created successfully!"
+          message: "User created successfully!",
+          revalidated: true,
+          now: Date.now()
         },
         {
           status: 201

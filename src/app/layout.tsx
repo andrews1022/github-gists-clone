@@ -3,6 +3,8 @@ import { Roboto } from "next/font/google";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
 
+import { Toaster } from "@/components/ui/toaster";
+
 import "@/styles/globals.css";
 
 import type { Metadata } from "next";
@@ -29,6 +31,8 @@ const RootLayout = ({ children }: RootLayoutProps) => {
         <Navbar />
         <main className="container my-10">{children}</main>
         <Footer />
+
+        <Toaster />
       </body>
     </html>
   );

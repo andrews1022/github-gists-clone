@@ -1,15 +1,11 @@
-import { drizzle } from "drizzle-orm/postgres-js";
 import { ArrowLeftCircle, FileEdit } from "lucide-react";
 import Link from "next/link";
 
 import { clientRoutes } from "@/constants/routes";
-import { client } from "@/drizzle/config";
-import * as schema from "@/drizzle/schema";
+import { db } from "@/drizzle/config";
 
 import { CodeHighlighterFull } from "@/components/CodeHighlighterFull";
 import { DeleteGistButton } from "@/components/DeleteGistButton";
-
-const db = drizzle(client, { schema });
 
 const getGist = async (gistId: string) => {
   const result = await db.query.gists.findFirst({
@@ -37,7 +33,7 @@ const IndividualGistPage = async ({ params }: IndividualGistPageProps) => {
         <ArrowLeftCircle /> Go Back
       </Link>
 
-      <div className="flex flex-col items-center gap-y-6 mt-6">
+      <div className="flex flex-col items-start gap-y-6 my-10">
         {gist ? (
           <>
             <h1 className="text-5xl">{gist.fileNameAndExtension}</h1>
@@ -49,7 +45,7 @@ const IndividualGistPage = async ({ params }: IndividualGistPageProps) => {
         ) : null}
       </div>
 
-      <div className="flex items-center justify-center gap-x-10 mt-10 mx-auto w-3/4">
+      <div className="flex items-center justify-center gap-x-10 mx-auto w-3/4">
         <Link
           className="border-2 border-sky-600 text-sky-600 text-1xl py-1.5 px-6 rounded-lg hover:bg-sky-600 hover:text-white transition-colors flex items-center gap-x-2"
           href={`/gists/${params.id}/edit`}

@@ -10,7 +10,7 @@ const CodeHighlighterFull = ({ code }: CodeHighlighterFullProps) => {
   return (
     <Highlight theme={themes.oneLight} code={code} language="tsx">
       {({ getLineProps, getTokenProps, style, tokens }) => (
-        <pre style={style} className="p-4 overflow-x-scroll rounded-lg w-3/4">
+        <pre style={style} className="p-4 overflow-x-scroll rounded-lg w-full">
           {tokens.map((line, index) => (
             <div key={index} {...getLineProps({ line })}>
               <span className={index < 9 ? "pl-2.5" : ""}>{index + 1}</span>
