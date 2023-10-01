@@ -1,19 +1,10 @@
 import { ArrowLeftCircle, FileEdit } from "lucide-react";
 import Link from "next/link";
 
-import { clientRoutes } from "@/constants/routes";
-import { db } from "@/drizzle/config";
-
 import { CodeHighlighterFull } from "@/components/CodeHighlighterFull";
 import { DeleteGistButton } from "@/components/DeleteGistButton";
-
-const getGist = async (gistId: string) => {
-  const result = await db.query.gists.findFirst({
-    where: (gists, { eq }) => eq(gists.gistId, gistId)
-  });
-
-  return result;
-};
+import { clientRoutes } from "@/constants/routes";
+import { getGist } from "@/drizzle/utils";
 
 type IndividualGistPageProps = {
   params: {

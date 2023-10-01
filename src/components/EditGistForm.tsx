@@ -1,16 +1,15 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
-import { PlusCircle } from "lucide-react";
+import { RefreshCcw } from "lucide-react";
 import { Suspense, useState } from "react";
 import { useForm } from "react-hook-form";
 import CodeMirror from "@uiw/react-codemirror";
 import { githubLight } from "@uiw/codemirror-theme-github";
 import { z } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
 
 import { LoadingIcon } from "@/components/LoadingIcon";
-
 import {
   Form,
   FormControl,
@@ -22,7 +21,6 @@ import {
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/components/ui/use-toast";
-
 import { apiRoutes, clientRoutes } from "@/constants/routes";
 
 const fileNameAndExtensionRegex = /^[\w-]+\.[\w-]+$/;
@@ -45,7 +43,7 @@ const formSchema = z.object({
 
 type FormInputs = z.infer<typeof formSchema>;
 
-const CreateGistForm = () => {
+const EditGistForm = () => {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
@@ -59,39 +57,39 @@ const CreateGistForm = () => {
     }
   });
 
-  const handleCreateGist = async (values: FormInputs) => {
+  const handleUpdateGist = async (values: FormInputs) => {
     setIsLoading(true);
 
-    const res = await fetch(apiRoutes.gists, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({
-        fileNameAndExtension: values.fileNameAndExtension,
-        description: values.description,
-        code: values.code
-      })
-    });
+    // const res = await fetch(apiRoutes.gists, {
+    //   method: "POST",
+    //   headers: {
+    //     "Content-Type": "application/json"
+    //   },
+    //   body: JSON.stringify({
+    //     fileNameAndExtension: values.fileNameAndExtension,
+    //     description: values.description,
+    //     code: values.code
+    //   })
+    // });
 
-    if (res.ok) {
-      setIsLoading(false);
-      router.push(clientRoutes.gists);
-    } else {
-      setIsLoading(false);
-      const { message } = await res.json();
+    // if (res.ok) {
+    //   setIsLoading(false);
+    //   router.push(clientRoutes.gists);
+    // } else {
+    //   setIsLoading(false);
+    //   const { message } = await res.json();
 
-      toast({
-        description: message,
-        title: "Uh oh! Something went wrong.",
-        variant: "destructive"
-      });
-    }
+    //   toast({
+    //     description: message,
+    //     title: "Uh oh! Something went wrong.",
+    //     variant: "destructive"
+    //   });
+    // }
   };
 
   return (
     <Form {...form}>
-      <form className="space-y-6" onSubmit={form.handleSubmit(handleCreateGist)}>
+      <form className="space-y-6" onSubmit={form.handleSubmit(handleUpdateGist)}>
         <FormField
           control={form.control}
           name="fileNameAndExtension"
@@ -153,7 +151,7 @@ const CreateGistForm = () => {
 
         <div className="flex justify-center">
           <button
-            className="border-2 border-emerald-600 text-emerald-600 text-2xl py-2 rounded-lg hover:bg-emerald-600 hover:text-white transition-colors w-1/2 flex items-center justify-center gap-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="border-2 border-sky-600 text-sky-600 text-2xl py-2 rounded-lg hover:bg-sky-600 hover:text-white transition-colors w-1/2 flex items-center justify-center gap-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
             disabled={isLoading}
             type="submit"
           >
@@ -163,7 +161,7 @@ const CreateGistForm = () => {
               </>
             ) : (
               <>
-                <PlusCircle /> <span>Create Gist</span>
+                <RefreshCcw /> <span>Update Gist</span>
               </>
             )}
           </button>
@@ -173,4 +171,4 @@ const CreateGistForm = () => {
   );
 };
 
-export { CreateGistForm };
+export { EditGistForm };
