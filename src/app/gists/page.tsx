@@ -20,6 +20,7 @@ import {
   CardTitle
 } from "@/components/ui/card";
 import { CodeHighlighterPreview } from "@/components/CodeHighlighterPreview";
+import { getRelativeTime } from "@/lib/utils";
 
 const MAXIMUM_NUMBER_OF_CHARACTERS = 80;
 
@@ -48,7 +49,6 @@ const GistsPage = async () => {
   }
 
   const gists = await getGists();
-  // console.log("jists: ", jists);
 
   return (
     <div>
@@ -91,6 +91,13 @@ const GistsPage = async () => {
 
                 <CardContent>
                   <CodeHighlighterPreview code={gist.code} />
+
+                  {gist.createdAt && gist.updatedAt ? (
+                    <CardDescription className="mt-2">
+                      Created: {getRelativeTime(gist.createdAt)} | Last updated:{" "}
+                      {getRelativeTime(gist.updatedAt)}
+                    </CardDescription>
+                  ) : null}
                 </CardContent>
 
                 <CardFooter>
