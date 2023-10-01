@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { PlusCircle } from "lucide-react";
-import { useState } from "react";
+import { Suspense, useState } from "react";
 import { useForm } from "react-hook-form";
 import CodeMirror from "@uiw/react-codemirror";
 import { githubLight } from "@uiw/codemirror-theme-github";
@@ -129,25 +129,27 @@ const CreateGistForm = () => {
           )}
         />
 
-        <FormField
-          control={form.control}
-          name="code"
-          render={({ field }) => (
-            <FormItem>
-              <FormLabel className="text-xl">Code</FormLabel>
-              <FormControl>
-                <CodeMirror
-                  value={field.value}
-                  onChange={field.onChange}
-                  height="25vw"
-                  theme={githubLight}
-                  className="rounded-md text-base border border-input"
-                />
-              </FormControl>
-              <FormMessage />
-            </FormItem>
-          )}
-        />
+        <Suspense fallback={<p>Loading code editor...</p>}>
+          <FormField
+            control={form.control}
+            name="code"
+            render={({ field }) => (
+              <FormItem>
+                <FormLabel className="text-xl">Code</FormLabel>
+                <FormControl>
+                  <CodeMirror
+                    value={field.value}
+                    onChange={field.onChange}
+                    height="25vw"
+                    theme={githubLight}
+                    className="rounded-md text-base border border-input"
+                  />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+        </Suspense>
 
         <div className="flex justify-center">
           <button
