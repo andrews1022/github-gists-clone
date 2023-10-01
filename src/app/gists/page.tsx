@@ -149,10 +149,7 @@ const GistsPage = async () => {
                 </CardHeader>
 
                 <CardContent>
-                  <CodeHighlighter
-                    code={gist.code}
-                    fileNameAndExtension={gist.fileNameAndExtension}
-                  />
+                  <CodeHighlighter code={gist.code} />
                 </CardContent>
 
                 <CardFooter>
