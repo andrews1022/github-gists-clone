@@ -21,73 +21,7 @@ import {
 } from "@/components/ui/card";
 import { CodeHighlighterPreview } from "@/components/CodeHighlighterPreview";
 
-// const supportedLanguages = [
-//   "javascript",
-//   "typescript",
-//   "jsx",
-//   "tsx",
-//   "swift",
-//   "kotlin",
-//   "objectivec",
-//   "js-extras",
-//   "reason",
-//   "rust",
-//   "graphql",
-//   "yaml",
-//   "go",
-//   "cpp",
-//   "markdown"
-// ];
-
-// const languageObjects = supportedLanguages.map((language) => {
-//   let fileExtension = "";
-//   // Determine file extension based on language
-//   switch (language) {
-//     case "javascript":
-//     case "jsx":
-//     case "js-extras":
-//       fileExtension = "js";
-//       break;
-//     case "typescript":
-//     case "tsx":
-//       fileExtension = "ts";
-//       break;
-//     case "swift":
-//       fileExtension = "swift";
-//       break;
-//     case "kotlin":
-//       fileExtension = "kt";
-//       break;
-//     case "objectivec":
-//       fileExtension = "m";
-//       break;
-//     case "reason":
-//       fileExtension = "re";
-//       break;
-//     case "rust":
-//       fileExtension = "rs";
-//       break;
-//     case "graphql":
-//       fileExtension = "graphql";
-//       break;
-//     case "yaml":
-//       fileExtension = "yaml";
-//       break;
-//     case "go":
-//       fileExtension = "go";
-//       break;
-//     case "cpp":
-//       fileExtension = "cpp";
-//       break;
-//     case "markdown":
-//       fileExtension = "md";
-//       break;
-//     default:
-//       fileExtension = "";
-//   }
-
-//   return { language, fileExtension };
-// });
+const MAXIMUM_NUMBER_OF_CHARACTERS = 80;
 
 const session = await getServerSession(options);
 
@@ -145,7 +79,14 @@ const GistsPage = async () => {
               <Card key={gist.gistId} className="col-span-full lg:col-span-2">
                 <CardHeader>
                   <CardTitle>{gist.fileNameAndExtension}</CardTitle>
-                  <CardDescription>{gist.description}</CardDescription>
+
+                  {gist.description ? (
+                    <CardDescription>
+                      {gist.description.length > MAXIMUM_NUMBER_OF_CHARACTERS
+                        ? `${gist.description.substring(0, MAXIMUM_NUMBER_OF_CHARACTERS)}...`
+                        : gist.description}
+                    </CardDescription>
+                  ) : null}
                 </CardHeader>
 
                 <CardContent>

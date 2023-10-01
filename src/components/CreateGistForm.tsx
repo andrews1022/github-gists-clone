@@ -2,11 +2,14 @@
 
 import { useRouter } from "next/navigation";
 import { PlusCircle } from "lucide-react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import CodeMirror from "@uiw/react-codemirror";
 import { githubLight } from "@uiw/codemirror-theme-github";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+
+import { LoadingIcon } from "@/components/LoadingIcon";
 
 import {
   Form,
@@ -44,6 +47,7 @@ type FormInputs = z.infer<typeof formSchema>;
 
 const CreateGistForm = () => {
   const router = useRouter();
+  const [isLoading, setIsLoading] = useState(false);
   const { toast } = useToast();
 
   const form = useForm<FormInputs>({
@@ -56,6 +60,8 @@ const CreateGistForm = () => {
   });
 
   const handleSubmit = async (values: FormInputs) => {
+    setIsLoading(true);
+
     const res = await fetch(apiRoutes.gists, {
       method: "POST",
       headers: {
@@ -69,8 +75,10 @@ const CreateGistForm = () => {
     });
 
     if (res.ok) {
+      setIsLoading(false);
       router.push(clientRoutes.gists);
     } else {
+      setIsLoading(false);
       const { message } = await res.json();
 
       toast({
@@ -143,10 +151,19 @@ const CreateGistForm = () => {
 
         <div className="flex justify-center">
           <button
-            className="border-2 border-emerald-600 text-emerald-600 text-2xl py-2 rounded-lg hover:bg-emerald-600 hover:text-white transition-colors w-1/2 flex items-center justify-center gap-x-2"
+            className="border-2 border-emerald-600 text-emerald-600 text-2xl py-2 rounded-lg hover:bg-emerald-600 hover:text-white transition-colors w-1/2 flex items-center justify-center gap-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
+            disabled={isLoading}
             type="submit"
           >
-            <PlusCircle /> <span>Create Gist</span>
+            {isLoading ? (
+              <>
+                <LoadingIcon fill="emerald" /> <span>Loading...</span>
+              </>
+            ) : (
+              <>
+                <PlusCircle /> <span>Create Gist</span>
+              </>
+            )}
           </button>
         </div>
       </form>
