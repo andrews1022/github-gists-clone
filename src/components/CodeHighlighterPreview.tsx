@@ -2,13 +2,13 @@
 
 import { Highlight, themes } from "prism-react-renderer";
 
-type CodeHighlighterProps = {
+type CodeHighlighterPreviewProps = {
   code: string;
 };
 
 const MAX_NUMBER_OF_LINES = 10;
 
-const CodeHighlighter = ({ code }: CodeHighlighterProps) => {
+const CodeHighlighterPreview = ({ code }: CodeHighlighterPreviewProps) => {
   return (
     <Highlight theme={themes.oneLight} code={code} language="tsx">
       {({ getLineProps, getTokenProps, style, tokens }) => (
@@ -86,4 +86,4 @@ const CodeHighlighter = ({ code }: CodeHighlighterProps) => {
   );
 };
 
-export { CodeHighlighter };
+export { CodeHighlighterPreview };

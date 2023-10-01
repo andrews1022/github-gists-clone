@@ -19,7 +19,7 @@ import {
   CardHeader,
   CardTitle
 } from "@/components/ui/card";
-import { CodeHighlighter } from "@/components/CodeHighlighter";
+import { CodeHighlighterPreview } from "@/components/CodeHighlighterPreview";
 
 // const supportedLanguages = [
 //   "javascript",
@@ -149,7 +149,7 @@ const GistsPage = async () => {
                 </CardHeader>
 
                 <CardContent>
-                  <CodeHighlighter code={gist.code} />
+                  <CodeHighlighterPreview code={gist.code} />
                 </CardContent>
 
                 <CardFooter>
