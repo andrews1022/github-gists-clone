@@ -11,17 +11,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { LoadingIcon } from "@/components/LoadingIcon";
 
-import {
-  Form,
-  FormControl,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormMessage
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
-import { useToast } from "@/components/ui/use-toast";
+import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/shadcn/ui/form";
+import { Input } from "@/shadcn/ui/input";
+import { Textarea } from "@/shadcn/ui/textarea";
+import { useToast } from "@/shadcn/ui/use-toast";
 
 import { apiRoutes, clientRoutes } from "@/constants/routes";
 

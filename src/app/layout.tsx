@@ -3,7 +3,7 @@ import { Roboto } from "next/font/google";
 import { Navbar } from "@/components/global/navbar";
 import { Footer } from "@/components/global/footer";
 
-import { Toaster } from "@/components/ui/toaster";
+import { Toaster } from "@/shadcn/ui/toaster";
 
 import "@/styles/globals.css";
 

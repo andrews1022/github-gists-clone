@@ -11,5 +11,3 @@ A full stack clone of GitHub Gists. The project uses:
 - [**Supabase**](https://supabase.com/) (Postgres Database)
 - [**Drizzle**](https://orm.drizzle.team/) (ORM)
 - [**NextAuth**](https://next-auth.js.org/) (Authentication)
-
-TO DO: look into schema cache reloading with supabase - try avoid session_error

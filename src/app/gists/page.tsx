@@ -18,7 +18,7 @@ import {
   CardFooter,
   CardHeader,
   CardTitle
-} from "@/components/ui/card";
+} from "@/shadcn/ui/card";
 import { CodeHighlighterPreview } from "@/components/CodeHighlighterPreview";
 import { getRelativeTime } from "@/lib/utils";
 
