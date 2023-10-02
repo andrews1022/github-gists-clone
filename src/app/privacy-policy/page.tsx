@@ -83,7 +83,7 @@ const PrivacyPolicyPage = () => {
                   href="https://twitter.com/andrew_devsrc"
                   target="_blank"
                   rel="noreferrer"
-                  className="text-sky-600 inline-block group opacity-70 hover:opacity-100 transition-opacity"
+                  className="inline-block group opacity-70 hover:opacity-100 transition-opacity"
                 >
                   Twitter
                   <span className="block max-w-0 group-hover:max-w-full transition-all duration-150 h-px bg-gray-400" />

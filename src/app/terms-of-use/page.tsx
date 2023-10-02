@@ -56,7 +56,7 @@ const TermsOfUsePage = () => {
               <li>
                 Your privacy is important to us. Please refer to our{" "}
                 <Link
-                  className="text-sky-600 inline-block group opacity-70 hover:opacity-100 transition-opacity"
+                  className="inline-block group opacity-70 hover:opacity-100 transition-opacity"
                   href={clientRoutes.privacyPolicy}
                 >
                   Privacy Policy

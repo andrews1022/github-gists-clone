@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Github } from "lucide-react";
 
 import { options } from "@/next-auth/options";
-import { SignOutButton } from "./SignOutButton";
+import { SignOutButton } from "@/components/SignOutButton";
 import { clientRoutes } from "@/constants/routes";
 
 const Navbar = async () => {
