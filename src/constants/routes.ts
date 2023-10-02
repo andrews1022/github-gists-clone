@@ -4,6 +4,8 @@ const apiRoutes = {
 
 const clientRoutes = {
   root: "/",
+  privacyPolicy: "/privacy-policy",
+  termsOfUse: "/terms-of-use",
   signIn: "/sign-in",
   signUp: "/sign-up",
   gists: "/gists",

@@ -1,9 +1,11 @@
+import { clientRoutes } from "@/constants/routes";
 import { Heart } from "lucide-react";
+import Link from "next/link";
 
 const Footer = () => {
   return (
-    <footer className="border-t-gray-200 border-t mt-auto p-5 flex flex-col items-center">
-      <p className="text-sm">
+    <footer className="border-t-gray-200 border-t mt-auto p-5 flex flex-col items-center text-sm space-y-2">
+      <p>
         Built by{" "}
         <a
           href="https://twitter.com/andrew_devsrc"
@@ -27,10 +29,34 @@ const Footer = () => {
         .
       </p>
 
-      <p className="flex items-center gap-x-2 mt-1 text-sm">
+      <p className="flex items-center gap-x-2 text-sm">
         This is just a side project I built for fun. Please don't get mad at me Microsoft{" "}
         <Heart fill="red" stroke="red" />
       </p>
+
+      <nav>
+        <ul className="flex items-center gap-x-2">
+          <li>
+            <Link
+              className="inline-block group opacity-70 hover:opacity-100 transition-opacity"
+              href={clientRoutes.privacyPolicy}
+            >
+              Privacy Policy
+            </Link>
+          </li>
+
+          <li>|</li>
+
+          <li>
+            <Link
+              className="inline-block group opacity-70 hover:opacity-100 transition-opacity"
+              href={clientRoutes.termsOfUse}
+            >
+              Terms of Use
+            </Link>
+          </li>
+        </ul>
+      </nav>
     </footer>
   );
 };
