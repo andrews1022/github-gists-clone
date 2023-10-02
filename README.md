@@ -6,7 +6,8 @@ A full stack clone of GitHub Gists. The project uses:
 - TypeScript
 - Tailwind
 - [**shadcn/ui**](https://ui.shadcn.com/)
-- [**Shiki**](https://shiki.matsu.io/) (displaying code)
+- [**react-codemirror**](https://uiwjs.github.io/react-codemirror/) (inputting code when creating gist)
+- [**prism-react-renderer**](https://github.com/FormidableLabs/prism-react-renderer) (displaying code previews)
 - [**Supabase**](https://supabase.com/) (Postgres Database)
 - [**Drizzle**](https://orm.drizzle.team/) (ORM)
 - [**NextAuth**](https://next-auth.js.org/) (Authentication)
