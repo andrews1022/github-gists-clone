@@ -26,7 +26,7 @@ const gistSchema = z.object({
     .min(1, "Description must be at least 1 character")
     .max(1000, "Description cannot be more than 1000 characters"),
   code: z.string().min(1, "Description must be at least 1 character"),
-  gistId: z.string()
+  gistId: z.string().optional()
 });
 
 export const revalidate = 0;
@@ -42,7 +42,7 @@ export const POST = async (request: NextRequest) => {
     const session = await getServerSession(options);
 
     if (session?.user) {
-      // check if a gist with the same file name and extension already exists in the database
+      // check if a gist with the same fileNameAndExtension already exists in the database
       const existingGist = await db.query.gists.findFirst({
         where: (gists, { eq }) => eq(gists.fileNameAndExtension, fileNameAndExtension)
       });
@@ -83,9 +83,11 @@ export const POST = async (request: NextRequest) => {
       );
     }
   } catch (error) {
+    console.log("error", error);
+
     return NextResponse.json(
       {
-        message: "Something went wrong!"
+        message: "Something went wrong when creating the gist!"
       },
       {
         status: 500
@@ -120,7 +122,7 @@ export const DELETE = async (request: NextRequest) => {
     if (!deleted) {
       return NextResponse.json(
         {
-          message: "Something went wrong!"
+          message: "Something went wrong when trying to delete this gist!"
         },
         {
           status: 500
@@ -136,7 +138,7 @@ export const DELETE = async (request: NextRequest) => {
     // return a 500 error
     return NextResponse.json(
       {
-        message: "Something went wrong!"
+        message: "Something went wrong when trying to delete this gist!"
       },
       {
         status: 500
@@ -152,9 +154,9 @@ export const PUT = async (request: NextRequest) => {
     // pull the fields out of the request body
     const { fileNameAndExtension, description, code, gistId } = gistSchema.parse(body);
 
-    // check if a gist with the same file name and extension already exists in the database
+    // check if a gist with the same gistId already exists in the database
     const existingGist = await db.query.gists.findFirst({
-      where: (gists, { eq }) => eq(gists.gistId, gistId)
+      where: (gists, { eq }) => eq(gists.gistId, gistId!)
     });
 
     if (!existingGist) {
@@ -177,7 +179,7 @@ export const PUT = async (request: NextRequest) => {
         code,
         updatedAt: new Date(getIso8601Date())
       })
-      .where(eq(gists.gistId, gistId));
+      .where(eq(gists.gistId, gistId!));
 
     // if the update query fails, return a 500 error
     if (!updated) {
