@@ -1,16 +1,17 @@
+import { desc, eq } from "drizzle-orm";
 import { Code, PlusCircle } from "lucide-react";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
 
+import { CodeHighlighterPreview } from "@/components/CodeHighlighterPreview";
+import { ContentWrapper } from "@/components/ui/content-wrapper";
 import { clientRoutes } from "@/constants/routes";
-import { options } from "@/next-auth/options";
-
-import { desc, eq } from "drizzle-orm";
 import { db } from "@/drizzle/config";
 import { gists } from "@/drizzle/schema";
-
+import { getRelativeTime } from "@/lib/utils";
+import { options } from "@/next-auth/options";
 import {
   Card,
   CardContent,
@@ -19,8 +20,6 @@ import {
   CardHeader,
   CardTitle
 } from "@/shadcn/ui/card";
-import { CodeHighlighterPreview } from "@/components/CodeHighlighterPreview";
-import { getRelativeTime } from "@/lib/utils";
 
 const MAXIMUM_NUMBER_OF_CHARACTERS = 80;
 
@@ -54,7 +53,7 @@ const GistsPage = async () => {
 
   return (
     <div>
-      <div className="flex flex-col items-center gap-y-6">
+      <ContentWrapper>
         {session?.user?.image ? (
           <Image
             className="rounded-full"
@@ -73,7 +72,7 @@ const GistsPage = async () => {
         >
           <PlusCircle /> Create Gist
         </Link>
-      </div>
+      </ContentWrapper>
 
       <div className="grid gap-6 grid-cols-4 mt-8">
         {gists.length

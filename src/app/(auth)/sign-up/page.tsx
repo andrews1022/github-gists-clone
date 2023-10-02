@@ -3,8 +3,10 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { GitHubAuthButton } from "@/components/GitHubAuthButton";
-import { options } from "@/next-auth/options";
+import { ContentWrapper } from "@/components/ui/content-wrapper";
+import { PageHeading } from "@/components/ui/page-heading";
 import { clientRoutes } from "@/constants/routes";
+import { options } from "@/next-auth/options";
 
 const SignUpPage = async () => {
   const session = await getServerSession(options);
@@ -14,10 +16,10 @@ const SignUpPage = async () => {
   }
 
   return (
-    <div className="flex flex-col items-center">
-      <h1 className="text-7xl">Sign Up</h1>
+    <ContentWrapper>
+      <PageHeading>Sign Up</PageHeading>
 
-      <div className="bg-gray-100 rounded-lg mt-5 p-7 w-2/4 flex flex-col gap-y-4">
+      <div className="bg-gray-100 rounded-lg p-7 w-2/4 flex flex-col gap-y-4">
         <GitHubAuthButton text="up" />
 
         <div className="bg-gray-400 h-px w-1/2 mx-auto" />
@@ -30,7 +32,7 @@ const SignUpPage = async () => {
           .
         </p>
       </div>
-    </div>
+    </ContentWrapper>
   );
 };
 

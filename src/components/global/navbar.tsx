@@ -14,7 +14,10 @@ const Navbar = async () => {
       <nav className="container py-3">
         <ul className="flex items-center gap-x-6">
           <li>
-            <Link className="flex items-center gap-x-2 text-2xl" href={clientRoutes.root}>
+            <Link
+              className="flex items-center gap-x-2 text-xl sm:text-2xl"
+              href={clientRoutes.root}
+            >
               <Github /> <span>GitHub Gists Clone</span>
             </Link>
           </li>

@@ -5,12 +5,12 @@ import { clientRoutes } from "@/constants/routes";
 
 const Footer = () => {
   return (
-    <footer className="border-t-gray-200 border-t mt-auto p-5 flex flex-col items-center text-sm space-y-2">
+    <footer className="border-t-gray-200 border-t mt-auto p-5 flex flex-col items-center text-sm space-y-2 text-center">
       <p>
         Built by{" "}
         <SemiTransparentLink href="https://twitter.com/andrew_devsrc" isExternal>
           andrew_devsrc
-        </SemiTransparentLink>{" "}
+        </SemiTransparentLink>
         . View the source code for this project on{" "}
         <SemiTransparentLink href="https://github.com/andrews1022/github-gists-clone" isExternal>
           GitHub
@@ -18,7 +18,7 @@ const Footer = () => {
         .
       </p>
 
-      <p className="flex items-center gap-x-2 text-sm">
+      <p className="flex items-center flex-col sm:flex-row gap-x-2 text-sm">
         This is just a side project I built for fun. Please don't get mad at me Microsoft{" "}
         <Heart fill="red" stroke="red" />
       </p>

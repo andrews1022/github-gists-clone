@@ -3,6 +3,8 @@
 import { Home } from "lucide-react";
 import { signOut } from "next-auth/react";
 
+import { ContentWrapper } from "@/components/ui/content-wrapper";
+import { PageHeading } from "@/components/ui/page-heading";
 import { clientRoutes } from "@/constants/routes";
 
 const RootErrorPage = () => {
@@ -11,8 +13,8 @@ const RootErrorPage = () => {
   };
 
   return (
-    <div className="flex flex-col items-center gap-y-6">
-      <h1 className="text-7xl">Oops!</h1>
+    <ContentWrapper>
+      <PageHeading>Oops!</PageHeading>
 
       <p className="text-xl">Something went wrong there.</p>
 
@@ -22,7 +24,7 @@ const RootErrorPage = () => {
       >
         <Home /> Go Home
       </button>
-    </div>
+    </ContentWrapper>
   );
 };
 
