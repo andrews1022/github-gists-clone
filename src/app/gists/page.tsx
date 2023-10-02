@@ -24,9 +24,9 @@ import { getRelativeTime } from "@/lib/utils";
 
 const MAXIMUM_NUMBER_OF_CHARACTERS = 80;
 
-const session = await getServerSession(options);
-
 const getGists = async () => {
+  const session = await getServerSession(options);
+
   if (!session) {
     redirect(clientRoutes.signIn);
   }
@@ -44,6 +44,8 @@ const getGists = async () => {
 };
 
 const GistsPage = async () => {
+  const session = await getServerSession(options);
+
   if (!session) {
     redirect(clientRoutes.signIn);
   }
