@@ -24,22 +24,26 @@ import {
 const MAXIMUM_NUMBER_OF_CHARACTERS = 80;
 
 const getGists = async () => {
-  const session = await getServerSession(options);
+  try {
+    const session = await getServerSession(options);
 
-  if (!session) {
-    redirect(clientRoutes.signIn);
+    if (!session) {
+      redirect(clientRoutes.signIn);
+    }
+
+    const { user } = session;
+    const { userId } = user;
+
+    const jists = await db
+      .select()
+      .from(gists)
+      .where(eq(gists.userId, userId!))
+      .orderBy(desc(gists.createdAt));
+
+    return jists;
+  } catch (error) {
+    console.log(`An error occurred when trying to get gists: ${error}`);
   }
-
-  const { user } = session;
-  const { userId } = user;
-
-  const jists = await db
-    .select()
-    .from(gists)
-    .where(eq(gists.userId, userId!))
-    .orderBy(desc(gists.createdAt));
-
-  return jists;
 };
 
 const GistsPage = async () => {
@@ -74,45 +78,45 @@ const GistsPage = async () => {
         </Link>
       </ContentWrapper>
 
-      <div className="grid gap-6 grid-cols-4 mt-8">
-        {gists.length
-          ? gists.map((gist) => (
-              <Card key={gist.gistId} className="col-span-full lg:col-span-2">
-                <CardHeader>
-                  <CardTitle>{gist.fileNameAndExtension}</CardTitle>
+      {gists ? (
+        <div className="grid gap-6 grid-cols-4 mt-8">
+          {gists.map((gist) => (
+            <Card key={gist.gistId} className="col-span-full lg:col-span-2">
+              <CardHeader>
+                <CardTitle>{gist.fileNameAndExtension}</CardTitle>
 
-                  {gist.description ? (
-                    <CardDescription>
-                      {gist.description.length > MAXIMUM_NUMBER_OF_CHARACTERS
-                        ? `${gist.description.substring(0, MAXIMUM_NUMBER_OF_CHARACTERS)}...`
-                        : gist.description}
-                    </CardDescription>
-                  ) : null}
-                </CardHeader>
+                {gist.description ? (
+                  <CardDescription>
+                    {gist.description.length > MAXIMUM_NUMBER_OF_CHARACTERS
+                      ? `${gist.description.substring(0, MAXIMUM_NUMBER_OF_CHARACTERS)}...`
+                      : gist.description}
+                  </CardDescription>
+                ) : null}
+              </CardHeader>
 
-                <CardContent>
-                  <CodeHighlighterPreview code={gist.code} />
+              <CardContent>
+                <CodeHighlighterPreview code={gist.code} />
 
-                  {gist.createdAt && gist.updatedAt ? (
-                    <CardDescription className="mt-2">
-                      Created: {getRelativeTime(gist.createdAt)} | Last updated:{" "}
-                      {getRelativeTime(gist.updatedAt)}
-                    </CardDescription>
-                  ) : null}
-                </CardContent>
+                {gist.createdAt && gist.updatedAt ? (
+                  <CardDescription className="mt-2">
+                    Created: {getRelativeTime(gist.createdAt)} | Last updated:{" "}
+                    {getRelativeTime(gist.updatedAt)}
+                  </CardDescription>
+                ) : null}
+              </CardContent>
 
-                <CardFooter>
-                  <Link
-                    className="border-2 border-gray-800 text-1xl py-1.5 px-6 rounded-lg hover:bg-gray-800 hover:text-white transition-colors flex items-center gap-x-2"
-                    href={`/gists/${gist.gistId}`}
-                  >
-                    <Code /> View Gist
-                  </Link>
-                </CardFooter>
-              </Card>
-            ))
-          : null}
-      </div>
+              <CardFooter>
+                <Link
+                  className="border-2 border-gray-800 text-1xl py-1.5 px-6 rounded-lg hover:bg-gray-800 hover:text-white transition-colors flex items-center gap-x-2"
+                  href={`/gists/${gist.gistId}`}
+                >
+                  <Code /> View Gist
+                </Link>
+              </CardFooter>
+            </Card>
+          ))}
+        </div>
+      ) : null}
     </div>
   );
 };

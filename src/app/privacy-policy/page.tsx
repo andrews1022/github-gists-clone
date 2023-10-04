@@ -1,3 +1,5 @@
+import { SemiTransparentLink } from "@/components/ui/semi-transparent-link";
+
 const applicationName = "GitHub Gists Clone";
 
 const PrivacyPolicyPage = () => {
@@ -79,15 +81,9 @@ const PrivacyPolicyPage = () => {
             <ul className="list-disc pl-4">
               <li>
                 If you have any questions about this Privacy Policy, please contact me on{" "}
-                <a
-                  href="https://twitter.com/andrew_devsrc"
-                  target="_blank"
-                  rel="noreferrer"
-                  className="inline-block group opacity-70 hover:opacity-100 transition-opacity"
-                >
+                <SemiTransparentLink href="https://twitter.com/andrew_devsrc" isExternal>
                   Twitter
-                  <span className="block max-w-0 group-hover:max-w-full transition-all duration-150 h-px bg-gray-400" />
-                </a>
+                </SemiTransparentLink>
                 .
               </li>
             </ul>
