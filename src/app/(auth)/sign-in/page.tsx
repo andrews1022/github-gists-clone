@@ -19,7 +19,7 @@ const SignInPage = async () => {
     <ContentWrapper>
       <PageHeading>Sign In</PageHeading>
 
-      <div className="bg-gray-100 rounded-lg p-7 w-2/4 flex flex-col items-center gap-y-4">
+      <div className="bg-gray-100 rounded-lg p-7 flex flex-col items-center gap-y-4 w-full text-center sm:w-9/12 lg:w-2/4">
         <GitHubAuthButton text="in" />
 
         <div className="bg-gray-400 h-px w-1/2 mx-auto" />

@@ -19,12 +19,12 @@ const SignUpPage = async () => {
     <ContentWrapper>
       <PageHeading>Sign Up</PageHeading>
 
-      <div className="bg-gray-100 rounded-lg p-7 w-2/4 flex flex-col gap-y-4">
+      <div className="bg-gray-100 rounded-lg p-7 flex flex-col items-center gap-y-4 w-full text-center sm:w-9/12 lg:w-2/4">
         <GitHubAuthButton text="up" />
 
         <div className="bg-gray-400 h-px w-1/2 mx-auto" />
 
-        <p className="text-center text-sm text-gray-600">
+        <p className="text-sm text-gray-600">
           If you do have an account, please{" "}
           <Link className="text-blue-500 hover:underline" href={clientRoutes.signIn}>
             Sign in

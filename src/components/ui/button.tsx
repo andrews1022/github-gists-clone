@@ -22,11 +22,14 @@ const Button = ({ bgColor, children, href, onClick, shade, size }: ButtonProps) 
     }
   };
 
+  const smallSizes = "text-xl py-1.5 px-8";
+  const largeSizes = "text-xl py-1.5 px-8 xs:text-2xl xs:py-2 xs:px-12";
+
   const classes = `
     flex items-center gap-x-2
     rounded-lg
     border-2 border-${bgColor}-${shade} text-${bgColor}-${shade}
-    ${size === "small" ? "text-1xl py-1.5 px-6" : "text-2xl py-2 px-12"}
+    ${size === "small" ? smallSizes : largeSizes}
     hover:bg-${bgColor}-${shade} hover:text-white transition-colors
   `;
 
