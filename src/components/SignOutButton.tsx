@@ -3,6 +3,7 @@
 import { signOut } from "next-auth/react";
 import { clientRoutes } from "@/constants/routes";
 import { LogOut } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 const SignOutButton = () => {
   const handleSignOut = () => {
@@ -10,13 +11,9 @@ const SignOutButton = () => {
   };
 
   return (
-    <button
-      className="border-2 border-gray-800 text-1xl py-1.5 px-6 rounded-lg hover:bg-gray-800 hover:text-white transition-colors flex items-center gap-x-2"
-      onClick={handleSignOut}
-      type="button"
-    >
+    <Button bgColor="gray" shade="800" size="small" onClick={handleSignOut}>
       <LogOut /> <span>Sign out</span>
-    </button>
+    </Button>
   );
 };
 

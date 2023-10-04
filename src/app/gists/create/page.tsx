@@ -1,18 +1,17 @@
 import { ArrowLeftCircle } from "lucide-react";
-import Link from "next/link";
 
+import { Button } from "@/components/ui/button";
 import { CreateGistForm } from "@/components/CreateGistForm";
 import { clientRoutes } from "@/constants/routes";
 
 const CreateGistPage = () => {
   return (
     <div>
-      <Link
-        className="border-2 border-gray-800 text-1xl py-1.5 px-6 rounded-lg hover:bg-gray-800 hover:text-white transition-colors inline-flex items-center gap-x-2"
-        href={clientRoutes.gists}
-      >
-        <ArrowLeftCircle /> Go Back
-      </Link>
+      <div className="flex items-start">
+        <Button bgColor="gray" shade="800" size="small" href={clientRoutes.gists}>
+          <ArrowLeftCircle /> Go Back
+        </Button>
+      </div>
 
       <h1 className="mt-6 text-center text-4xl">Create a gist</h1>
 

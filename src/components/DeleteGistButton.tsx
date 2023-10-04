@@ -17,6 +17,7 @@ import {
 import { useToast } from "@/shadcn/ui/use-toast";
 
 import { apiRoutes, clientRoutes } from "@/constants/routes";
+import { Button } from "./ui/button";
 
 const DeleteGistButton = () => {
   const router = useRouter();
@@ -56,12 +57,9 @@ const DeleteGistButton = () => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <button
-          className="border-2 border-red-600 text-red-600 text-1xl py-1.5 px-6 rounded-lg hover:bg-red-600 hover:text-white transition-colors flex items-center gap-x-2"
-          type="button"
-        >
+        <Button bgColor="red" shade="600" size="small" type="button">
           <XCircle /> Delete this gist
-        </button>
+        </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>

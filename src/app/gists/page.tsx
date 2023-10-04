@@ -2,7 +2,6 @@ import { desc, eq } from "drizzle-orm";
 import { Code, PlusCircle } from "lucide-react";
 import { getServerSession } from "next-auth";
 import Image from "next/image";
-import Link from "next/link";
 import { redirect } from "next/navigation";
 
 import { CodeHighlighterPreview } from "@/components/CodeHighlighterPreview";
@@ -20,6 +19,7 @@ import {
   CardHeader,
   CardTitle
 } from "@/shadcn/ui/card";
+import { Button } from "@/components/ui/button";
 
 const MAXIMUM_NUMBER_OF_CHARACTERS = 80;
 
@@ -65,17 +65,15 @@ const GistsPage = async () => {
             alt={`${session.user.name}'s GitHub avatar`}
             height={175}
             width={175}
+            priority
           />
         ) : null}
 
         <h1 className="text-5xl">{session?.user?.name}'s Gists</h1>
 
-        <Link
-          className="border-2 border-emerald-600 text-emerald-600 text-2xl py-2 px-12 rounded-lg hover:bg-emerald-600 hover:text-white transition-colors flex items-center gap-x-2"
-          href={clientRoutes.createGist}
-        >
+        <Button bgColor="emerald" shade="600" size="large" href={clientRoutes.createGist}>
           <PlusCircle /> Create Gist
-        </Link>
+        </Button>
       </ContentWrapper>
 
       {gists ? (
@@ -106,12 +104,9 @@ const GistsPage = async () => {
               </CardContent>
 
               <CardFooter>
-                <Link
-                  className="border-2 border-gray-800 text-1xl py-1.5 px-6 rounded-lg hover:bg-gray-800 hover:text-white transition-colors flex items-center gap-x-2"
-                  href={`/gists/${gist.gistId}`}
-                >
+                <Button bgColor="gray" shade="800" size="small" href={`/gists/${gist.gistId}`}>
                   <Code /> View Gist
-                </Link>
+                </Button>
               </CardFooter>
             </Card>
           ))}

@@ -16,6 +16,7 @@ import { Textarea } from "@/shadcn/ui/textarea";
 import { useToast } from "@/shadcn/ui/use-toast";
 import { apiRoutes, clientRoutes } from "@/constants/routes";
 import { Gist } from "@/types";
+import { Button } from "./ui/button";
 
 const fileNameAndExtensionRegex = /^[\w-]+\.[\w-]+$/;
 
@@ -151,11 +152,7 @@ const EditGistForm = ({ gist }: EditGistFormProps) => {
         </Suspense>
 
         <div className="flex justify-center">
-          <button
-            className="border-2 border-sky-600 text-sky-600 text-2xl py-2 rounded-lg hover:bg-sky-600 hover:text-white transition-colors w-1/2 flex items-center justify-center gap-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
-            disabled={isLoading}
-            type="submit"
-          >
+          <Button bgColor="sky" shade="600" size="large" type="submit">
             {isLoading ? (
               <>
                 <LoadingIcon fill="emerald" /> <span>Loading...</span>
@@ -165,7 +162,7 @@ const EditGistForm = ({ gist }: EditGistFormProps) => {
                 <RefreshCcw /> <span>Update Gist</span>
               </>
             )}
-          </button>
+          </Button>
         </div>
       </form>
     </Form>

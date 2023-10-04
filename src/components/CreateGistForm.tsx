@@ -17,6 +17,7 @@ import { Textarea } from "@/shadcn/ui/textarea";
 import { useToast } from "@/shadcn/ui/use-toast";
 
 import { apiRoutes, clientRoutes } from "@/constants/routes";
+import { Button } from "./ui/button";
 
 const fileNameAndExtensionRegex = /^[\w-]+\.[\w-]+$/;
 
@@ -145,11 +146,7 @@ const CreateGistForm = () => {
         </Suspense>
 
         <div className="flex justify-center">
-          <button
-            className="border-2 border-emerald-600 text-emerald-600 text-2xl py-2 rounded-lg hover:bg-emerald-600 hover:text-white transition-colors w-1/2 flex items-center justify-center gap-x-2 disabled:opacity-50 disabled:cursor-not-allowed"
-            disabled={isLoading}
-            type="submit"
-          >
+          <Button bgColor="emerald" shade="600" size="large" type="submit">
             {isLoading ? (
               <>
                 <LoadingIcon fill="emerald" /> <span>Loading...</span>
@@ -159,7 +156,7 @@ const CreateGistForm = () => {
                 <PlusCircle /> <span>Create Gist</span>
               </>
             )}
-          </button>
+          </Button>
         </div>
       </form>
     </Form>
