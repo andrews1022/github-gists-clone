@@ -8,12 +8,12 @@ const CreateGistPage = () => {
   return (
     <div>
       <div className="flex items-start">
-        <Button bgColor="gray" shade="800" size="small" href={clientRoutes.gists}>
+        <Button bgColor="gray" shade="dark" size="small" href={clientRoutes.gists}>
           <ArrowLeftCircle /> Go Back
         </Button>
       </div>
 
-      <h1 className="mt-6 text-center text-4xl">Create a gist</h1>
+      <h1 className="my-6 text-left sm:text-center text-4xl">Create a gist</h1>
 
       <CreateGistForm />
     </div>

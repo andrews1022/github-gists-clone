@@ -19,26 +19,24 @@ const IndividualGistPage = async ({ params }: IndividualGistPageProps) => {
 
   return (
     <div>
-      <div className="flex items-start">
-        <Button bgColor="gray" shade="800" size="small" href={clientRoutes.gists}>
+      <div className="flex flex-col items-start gap-y-6">
+        <Button bgColor="gray" shade="dark" size="small" href={clientRoutes.gists}>
           <ArrowLeftCircle /> Go Back
         </Button>
-      </div>
 
-      <ContentWrapper>
         {gist ? (
           <>
-            <h1 className="text-5xl">{gist.fileNameAndExtension}</h1>
+            <h1 className="text-4xl">{gist.fileNameAndExtension}</h1>
 
-            <p className="text-xl">{gist.description}</p>
+            <p className="text-base sm:text-xl">{gist.description}</p>
 
             <CodeHighlighterFull code={gist.code} />
           </>
         ) : null}
-      </ContentWrapper>
+      </div>
 
       <div className="flex items-center justify-center gap-x-10 mx-auto w-3/4 mt-10">
-        <Button bgColor="sky" shade="600" size="small" href={`/gists/${params.id}/edit`}>
+        <Button bgColor="sky" shade="light" size="small" href={`/gists/${params.id}/edit`}>
           <FileEdit /> Edit this gist
         </Button>
 

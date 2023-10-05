@@ -1,9 +1,10 @@
 "use client";
 
-import { signOut } from "next-auth/react";
-import { clientRoutes } from "@/constants/routes";
 import { LogOut } from "lucide-react";
+import { signOut } from "next-auth/react";
+
 import { Button } from "@/components/ui/button";
+import { clientRoutes } from "@/constants/routes";
 
 const SignOutButton = () => {
   const handleSignOut = () => {
@@ -11,8 +12,8 @@ const SignOutButton = () => {
   };
 
   return (
-    <Button bgColor="gray" shade="800" size="small" onClick={handleSignOut}>
-      <LogOut /> <span>Sign out</span>
+    <Button bgColor="gray" shade="dark" size="small" onClick={handleSignOut}>
+      <LogOut /> <span className="hidden sm:block">Sign out</span>
     </Button>
   );
 };

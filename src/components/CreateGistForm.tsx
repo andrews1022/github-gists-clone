@@ -10,6 +10,7 @@ import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { LoadingIcon } from "@/components/LoadingIcon";
+import { Button } from "@/components/ui/button";
 
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/shadcn/ui/form";
 import { Input } from "@/shadcn/ui/input";
@@ -17,7 +18,6 @@ import { Textarea } from "@/shadcn/ui/textarea";
 import { useToast } from "@/shadcn/ui/use-toast";
 
 import { apiRoutes, clientRoutes } from "@/constants/routes";
-import { Button } from "./ui/button";
 
 const fileNameAndExtensionRegex = /^[\w-]+\.[\w-]+$/;
 
@@ -146,7 +146,7 @@ const CreateGistForm = () => {
         </Suspense>
 
         <div className="flex justify-center">
-          <Button bgColor="emerald" shade="600" size="large" type="submit">
+          <Button bgColor="emerald" shade="light" size="large" type="submit">
             {isLoading ? (
               <>
                 <LoadingIcon fill="emerald" /> <span>Loading...</span>

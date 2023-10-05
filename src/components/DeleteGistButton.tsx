@@ -16,8 +16,8 @@ import {
 } from "@/shadcn/ui/alert-dialog";
 import { useToast } from "@/shadcn/ui/use-toast";
 
+import { Button } from "@/components/ui/button";
 import { apiRoutes, clientRoutes } from "@/constants/routes";
-import { Button } from "./ui/button";
 
 const DeleteGistButton = () => {
   const router = useRouter();
@@ -57,7 +57,7 @@ const DeleteGistButton = () => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button bgColor="red" shade="600" size="small" type="button">
+        <Button bgColor="red" shade="light" size="small" type="button">
           <XCircle /> Delete this gist
         </Button>
       </AlertDialogTrigger>

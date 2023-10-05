@@ -15,7 +15,7 @@ const Navbar = async () => {
         <ul className="flex items-center gap-x-6">
           <li>
             <Link
-              className="flex items-center gap-x-2 text-xl sm:text-2xl"
+              className="flex items-center gap-x-2 text-xl md:text-2xl"
               href={clientRoutes.root}
             >
               <Github /> <span>GitHub Gists Clone</span>
@@ -23,7 +23,7 @@ const Navbar = async () => {
           </li>
 
           {session ? (
-            <li className="group opacity-70 hover:opacity-100 transition-opacity translate-y-0.5">
+            <li className="group opacity-70 hover:opacity-100 transition-opacity translate-y-0.5 hidden sm:block">
               <Link href={clientRoutes.gists}>
                 Gists
                 <span className="mt-px block max-w-0 group-hover:max-w-full transition-all duration-150 h-px bg-gray-400" />

@@ -5,6 +5,8 @@ import Image from "next/image";
 import { redirect } from "next/navigation";
 
 import { CodeHighlighterPreview } from "@/components/CodeHighlighterPreview";
+import { Button } from "@/components/ui/button";
+import { PageHeading } from "@/components/ui/page-heading";
 import { ContentWrapper } from "@/components/ui/content-wrapper";
 import { clientRoutes } from "@/constants/routes";
 import { db } from "@/drizzle/config";
@@ -19,7 +21,6 @@ import {
   CardHeader,
   CardTitle
 } from "@/shadcn/ui/card";
-import { Button } from "@/components/ui/button";
 
 const MAXIMUM_NUMBER_OF_CHARACTERS = 80;
 
@@ -69,9 +70,9 @@ const GistsPage = async () => {
           />
         ) : null}
 
-        <h1 className="text-5xl">{session?.user?.name}'s Gists</h1>
+        <PageHeading>{session?.user?.name}'s Gists</PageHeading>
 
-        <Button bgColor="emerald" shade="600" size="large" href={clientRoutes.createGist}>
+        <Button bgColor="emerald" shade="light" size="large" href={clientRoutes.createGist}>
           <PlusCircle /> Create Gist
         </Button>
       </ContentWrapper>
@@ -104,7 +105,7 @@ const GistsPage = async () => {
               </CardContent>
 
               <CardFooter>
-                <Button bgColor="gray" shade="800" size="small" href={`/gists/${gist.gistId}`}>
+                <Button bgColor="gray" shade="dark" size="small" href={`/gists/${gist.gistId}`}>
                   <Code /> View Gist
                 </Button>
               </CardFooter>

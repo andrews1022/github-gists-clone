@@ -1,66 +1,75 @@
-"use client";
-
+import { forwardRef } from "react";
 import Link from "next/link";
-import type { ReactNode } from "react";
+import type { AnchorHTMLAttributes, ButtonHTMLAttributes, ForwardedRef, ReactNode } from "react";
 
-interface ButtonProps {
+type ButtonProps = {
   bgColor: "emerald" | "gray" | "red" | "sky";
   children: ReactNode;
   href?: string;
   onClick?: () => void;
-  shade: "600" | "800";
+  shade: "light" | "dark";
   size: "small" | "medium" | "large";
   type?: "button" | "submit";
-}
+};
 
-// create reusable component that could be either a button or a link
-const Button = ({
-  bgColor,
-  children,
-  href,
-  onClick,
-  shade,
-  size,
-  type = "button"
-}: ButtonProps) => {
-  const smallSizes = "text-base py-1.5 px-6";
-  const mediumSizes = "text-xl py-1.5 px-8";
-  const largeSizes = `text-xl py-1.5 px-8 xs:text-2xl xs:py-2 xs:px-12`;
+type ForwardRefT = HTMLButtonElement | HTMLAnchorElement;
+type ForwardRefP = ButtonProps &
+  ButtonHTMLAttributes<HTMLButtonElement> &
+  AnchorHTMLAttributes<HTMLAnchorElement>;
 
-  const determineSize = () => {
-    switch (size) {
-      case "small":
-        return smallSizes;
-      case "medium":
-        return mediumSizes;
-      case "large":
-        return largeSizes;
-      default:
-        return mediumSizes;
+type ForwardedAnchor = ForwardedRef<HTMLAnchorElement>;
+type ForwardedButton = ForwardedRef<HTMLButtonElement>;
+
+const colorVariants = {
+  dark: {
+    emerald: "border-emerald-800 text-emerald-800 hover:bg-emerald-800",
+    gray: "border-gray-800 text-gray-800 hover:bg-gray-800",
+    red: "border-red-800 text-red-800 hover:bg-red-800",
+    sky: "border-sky-800 text-sky-800 hover:bg-sky-800"
+  },
+  light: {
+    emerald: "border-emerald-600 text-emerald-600 hover:bg-emerald-600",
+    gray: "border-gray-600 text-gray-600 hover:bg-gray-600",
+    red: "border-red-600 text-red-600 hover:bg-red-600",
+    sky: "border-sky-600 text-sky-600 hover:bg-sky-600"
+  }
+};
+
+const sizeVariants = {
+  small: "text-base py-1.5 px-6",
+  medium: "text-xl py-1.5 px-8",
+  large: "text-xl py-1.5 px-8 xs:text-2xl xs:py-2 xs:px-12"
+};
+
+const Button = forwardRef<ForwardRefT, ForwardRefP>(
+  ({ bgColor, children, href, onClick, shade, size, type = "button" }, ref) => {
+    const colorClasses = colorVariants[shade][bgColor];
+    const sizeClasses = sizeVariants[size];
+
+    const classes = `
+      flex items-center gap-2 rounded-lg ${sizeClasses}
+      border-2 ${colorClasses} hover:text-white transition-colors
+    `;
+
+    if (href) {
+      return (
+        <Link className={classes} href={href} ref={ref as ForwardedAnchor}>
+          {children}
+        </Link>
+      );
     }
-  };
 
-  const classes = `
-    flex items-center gap-x-2
-    rounded-lg
-    border-2 border-${bgColor}-${shade} text-${bgColor}-${shade}
-    ${determineSize()}
-    hover:bg-${bgColor}-${shade} hover:text-white transition-colors
-  `;
-
-  if (href) {
     return (
-      <Link className={classes} href={href}>
+      <button
+        className={classes}
+        onClick={onClick ? onClick : undefined}
+        ref={ref as ForwardedButton}
+        type={type}
+      >
         {children}
-      </Link>
+      </button>
     );
   }
-
-  return (
-    <button className={classes} onClick={onClick ? onClick : undefined} type={type}>
-      {children}
-    </button>
-  );
-};
+);
 
 export { Button };

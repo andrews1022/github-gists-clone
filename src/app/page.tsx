@@ -20,17 +20,11 @@ const HomePage = async () => {
         A simple site to display, create, and manage your gists.
       </p>
 
-      <Button bgColor="gray" shade="800" size="large" href={href}>
-        {session ? (
-          <>
-            <Code /> <span>View Gists</span>
-          </>
-        ) : (
-          <>
-            <LogIn /> <span>Sign In</span>
-          </>
-        )}
-      </Button>
+      {session ? (
+        <Button bgColor="gray" shade="dark" size="large" href={href}>
+          <Code /> <span>View Gists</span>
+        </Button>
+      ) : null}
     </ContentWrapper>
   );
 };

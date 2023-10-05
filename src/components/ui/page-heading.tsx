@@ -5,7 +5,7 @@ type PageHeadingProps = {
 };
 
 const PageHeading = ({ children }: PageHeadingProps) => {
-  return <h1 className="text-5xl xs:text-6xl sm:text-7xl">{children}</h1>;
+  return <h1 className="text-center text-4xl xs:text-5xl sm:text-6xl md:text-7xl">{children}</h1>;
 };
 
 export { PageHeading };

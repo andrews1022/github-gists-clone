@@ -17,7 +17,7 @@ const EditIndividualGistPage = async ({ params }: EditIndividualGistPageProps) =
   return (
     <div>
       <div className="flex items-start">
-        <Button bgColor="red" shade="600" size="small" href={clientRoutes.gists}>
+        <Button bgColor="red" shade="light" size="small" href={clientRoutes.gists}>
           <Ban /> Cancel edit
         </Button>
       </div>
