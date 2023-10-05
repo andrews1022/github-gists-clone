@@ -5,7 +5,7 @@ import { clientRoutes } from "@/constants/routes";
 
 const Footer = () => {
   return (
-    <footer className="border-t-gray-200 border-t mt-auto p-5 flex flex-col items-center text-sm space-y-2 text-center">
+    <footer className="border-t-gray-200 border-t mt-auto p-5 flex flex-col items-center space-y-2 text-sm text-center">
       <p>
         Built by{" "}
         <SemiTransparentLink href="https://twitter.com/andrew_devsrc" isExternal>
@@ -18,7 +18,7 @@ const Footer = () => {
         .
       </p>
 
-      <p className="flex items-center flex-col sm:flex-row gap-x-2 text-sm">
+      <p className="flex items-center flex-col sm:flex-row gap-x-2">
         This is just a side project I built for fun. Please don't get mad at me Microsoft{" "}
         <Heart fill="red" stroke="red" />
       </p>

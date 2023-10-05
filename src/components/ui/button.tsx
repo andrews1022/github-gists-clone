@@ -7,7 +7,6 @@ type ButtonProps = {
   children: ReactNode;
   href?: string;
   onClick?: () => void;
-  shade: "light" | "dark";
   size: "small" | "medium" | "large";
   type?: "button" | "submit";
 };
@@ -21,18 +20,10 @@ type ForwardedAnchor = ForwardedRef<HTMLAnchorElement>;
 type ForwardedButton = ForwardedRef<HTMLButtonElement>;
 
 const colorVariants = {
-  dark: {
-    emerald: "border-emerald-800 text-emerald-800 hover:bg-emerald-800",
-    gray: "border-gray-800 text-gray-800 hover:bg-gray-800",
-    red: "border-red-800 text-red-800 hover:bg-red-800",
-    sky: "border-sky-800 text-sky-800 hover:bg-sky-800"
-  },
-  light: {
-    emerald: "border-emerald-600 text-emerald-600 hover:bg-emerald-600",
-    gray: "border-gray-600 text-gray-600 hover:bg-gray-600",
-    red: "border-red-600 text-red-600 hover:bg-red-600",
-    sky: "border-sky-600 text-sky-600 hover:bg-sky-600"
-  }
+  emerald: "border-emerald-600 text-emerald-600 hover:bg-emerald-600",
+  gray: "border-gray-800 text-gray-800 hover:bg-gray-800",
+  red: "border-red-600 text-red-600 hover:bg-red-600",
+  sky: "border-sky-600 text-sky-600 hover:bg-sky-600"
 };
 
 const sizeVariants = {
@@ -42,8 +33,8 @@ const sizeVariants = {
 };
 
 const Button = forwardRef<ForwardRefT, ForwardRefP>(
-  ({ bgColor, children, href, onClick, shade, size, type = "button" }, ref) => {
-    const colorClasses = colorVariants[shade][bgColor];
+  ({ bgColor, children, href, onClick, size, type = "button" }, ref) => {
+    const colorClasses = colorVariants[bgColor];
     const sizeClasses = sizeVariants[size];
 
     const classes = `

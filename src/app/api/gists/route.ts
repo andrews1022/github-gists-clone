@@ -2,7 +2,6 @@ import { eq } from "drizzle-orm";
 import { getServerSession } from "next-auth";
 import { revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
-import { z } from "zod";
 
 import { clientRoutes } from "@/constants/routes";
 import { db } from "@/drizzle/config";
@@ -10,24 +9,7 @@ import { gists } from "@/drizzle/schema";
 import { options } from "@/next-auth/options";
 import { getIso8601Date } from "@/lib/utils";
 
-const fileNameAndExtensionRegex = /^[\w-]+\.[\w-]+$/;
-
-const gistSchema = z.object({
-  fileNameAndExtension: z
-    .string()
-    .min(1, "Name must be at least 1 character")
-    .max(100, "Name cannot be more than 100 characters")
-    .regex(
-      new RegExp(fileNameAndExtensionRegex),
-      "Name must be a valid file name with extension, eg: useMyCustomHook.ts"
-    ),
-  description: z
-    .string()
-    .min(1, "Description must be at least 1 character")
-    .max(1000, "Description cannot be more than 1000 characters"),
-  code: z.string().min(1, "Description must be at least 1 character"),
-  gistId: z.string().optional()
-});
+import { formSchema } from "@/lib/forms";
 
 export const revalidate = 0;
 
@@ -37,7 +19,7 @@ export const POST = async (request: NextRequest) => {
     const body = await request.json();
 
     // pull the fields out of the request body
-    const { fileNameAndExtension, description, code } = gistSchema.parse(body);
+    const { fileNameAndExtension, description, code } = formSchema.parse(body);
 
     const session = await getServerSession(options);
 
@@ -152,7 +134,7 @@ export const PUT = async (request: NextRequest) => {
     const body = await request.json();
 
     // pull the fields out of the request body
-    const { fileNameAndExtension, description, code, gistId } = gistSchema.parse(body);
+    const { fileNameAndExtension, description, code, gistId } = formSchema.parse(body);
 
     // check if a gist with the same gistId already exists in the database
     const existingGist = await db.query.gists.findFirst({

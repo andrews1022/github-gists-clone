@@ -1,10 +1,13 @@
-import { Code, LogIn } from "lucide-react";
+import { Code } from "lucide-react";
 import { getServerSession } from "next-auth";
 
+import { Paragraph } from "@/components/ui/paragraph";
 import { Button } from "@/components/ui/button";
 import { ContentWrapper } from "@/components/ui/content-wrapper";
 import { PageHeading } from "@/components/ui/page-heading";
+
 import { clientRoutes } from "@/constants/routes";
+
 import { options } from "@/next-auth/options";
 
 const HomePage = async () => {
@@ -16,12 +19,12 @@ const HomePage = async () => {
     <ContentWrapper>
       <PageHeading>Gists Clone</PageHeading>
 
-      <p className="text-center text-xl">
-        A simple site to display, create, and manage your gists.
-      </p>
+      <div className="text-center">
+        <Paragraph>A simple site to display, create, and manage your gists.</Paragraph>
+      </div>
 
       {session ? (
-        <Button bgColor="gray" shade="dark" size="large" href={href}>
+        <Button bgColor="gray" size="large" href={href}>
           <Code /> <span>View Gists</span>
         </Button>
       ) : null}

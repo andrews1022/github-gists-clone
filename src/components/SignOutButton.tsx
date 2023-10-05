@@ -12,7 +12,7 @@ const SignOutButton = () => {
   };
 
   return (
-    <Button bgColor="gray" shade="dark" size="small" onClick={handleSignOut}>
+    <Button bgColor="gray" size="small" onClick={handleSignOut}>
       <LogOut /> <span className="hidden sm:block">Sign out</span>
     </Button>
   );

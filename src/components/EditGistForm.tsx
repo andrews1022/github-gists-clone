@@ -1,42 +1,27 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 import { RefreshCcw } from "lucide-react";
 import { Suspense, useState } from "react";
 import { useForm } from "react-hook-form";
 import CodeMirror from "@uiw/react-codemirror";
 import { githubLight } from "@uiw/codemirror-theme-github";
-import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 import { LoadingIcon } from "@/components/LoadingIcon";
+import { Button } from "@/components/ui/button";
+
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/shadcn/ui/form";
 import { Input } from "@/shadcn/ui/input";
 import { Textarea } from "@/shadcn/ui/textarea";
 import { useToast } from "@/shadcn/ui/use-toast";
+
 import { apiRoutes, clientRoutes } from "@/constants/routes";
+
+import { formSchema } from "@/lib/forms";
+import type { FormInputs } from "@/lib/forms";
+
 import { Gist } from "@/types";
-import { Button } from "./ui/button";
-
-const fileNameAndExtensionRegex = /^[\w-]+\.[\w-]+$/;
-
-const formSchema = z.object({
-  fileNameAndExtension: z
-    .string()
-    .min(1, "Name must be at least 1 character")
-    .max(100, "Name cannot be more than 100 characters")
-    .regex(
-      new RegExp(fileNameAndExtensionRegex),
-      "Name must be a valid file name with extension, eg: useMyCustomHook.ts"
-    ),
-  description: z
-    .string()
-    .min(1, "Description must be at least 1 character")
-    .max(1000, "Description cannot be more than 1000 characters"),
-  code: z.string().min(1, "Description must be at least 1 character")
-});
-
-type FormInputs = z.infer<typeof formSchema>;
 
 type EditGistFormProps = {
   gist: Gist | undefined | null;
@@ -152,7 +137,7 @@ const EditGistForm = ({ gist }: EditGistFormProps) => {
         </Suspense>
 
         <div className="flex justify-center">
-          <Button bgColor="sky" shade="600" size="large" type="submit">
+          <Button bgColor="sky" size="large" type="submit">
             {isLoading ? (
               <>
                 <LoadingIcon fill="emerald" /> <span>Loading...</span>

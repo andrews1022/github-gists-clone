@@ -16,7 +16,7 @@ const GitHubAuthButton = ({ text }: GitHubAuthButtonProps) => {
   };
 
   return (
-    <Button bgColor="gray" shade="dark" size="large" onClick={handleClick}>
+    <Button bgColor="gray" size="large" onClick={handleClick}>
       <Github className="hidden xs:block" /> <span>Sign {text} with GitHub</span>
     </Button>
   );

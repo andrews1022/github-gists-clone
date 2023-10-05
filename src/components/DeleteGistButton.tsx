@@ -57,7 +57,7 @@ const DeleteGistButton = () => {
   return (
     <AlertDialog>
       <AlertDialogTrigger asChild>
-        <Button bgColor="red" shade="light" size="small" type="button">
+        <Button bgColor="red" size="small" type="button">
           <XCircle /> Delete this gist
         </Button>
       </AlertDialogTrigger>

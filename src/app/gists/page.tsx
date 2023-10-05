@@ -64,15 +64,15 @@ const GistsPage = async () => {
             className="rounded-full"
             src={session.user.image}
             alt={`${session.user.name}'s GitHub avatar`}
-            height={175}
-            width={175}
+            height={150}
+            width={150}
             priority
           />
         ) : null}
 
         <PageHeading>{session?.user?.name}'s Gists</PageHeading>
 
-        <Button bgColor="emerald" shade="light" size="large" href={clientRoutes.createGist}>
+        <Button bgColor="emerald" size="large" href={clientRoutes.createGist}>
           <PlusCircle /> Create Gist
         </Button>
       </ContentWrapper>
@@ -105,7 +105,7 @@ const GistsPage = async () => {
               </CardContent>
 
               <CardFooter>
-                <Button bgColor="gray" shade="dark" size="small" href={`/gists/${gist.gistId}`}>
+                <Button bgColor="gray" size="small" href={`/gists/${gist.gistId}`}>
                   <Code /> View Gist
                 </Button>
               </CardFooter>

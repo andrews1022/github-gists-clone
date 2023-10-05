@@ -1,11 +1,14 @@
 import { ArrowLeftCircle, FileEdit } from "lucide-react";
-import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
+import { PageHeading } from "@/components/ui/page-heading";
+import { Paragraph } from "@/components/ui/paragraph";
+
 import { CodeHighlighterFull } from "@/components/CodeHighlighterFull";
 import { DeleteGistButton } from "@/components/DeleteGistButton";
-import { ContentWrapper } from "@/components/ui/content-wrapper";
+
 import { clientRoutes } from "@/constants/routes";
+
 import { getGist } from "@/drizzle/utils";
 
 type IndividualGistPageProps = {
@@ -18,25 +21,25 @@ const IndividualGistPage = async ({ params }: IndividualGistPageProps) => {
   const gist = await getGist(params.id);
 
   return (
-    <div>
-      <div className="flex flex-col items-start gap-y-6">
-        <Button bgColor="gray" shade="dark" size="small" href={clientRoutes.gists}>
-          <ArrowLeftCircle /> Go Back
-        </Button>
+    <div className="flex flex-col items-start gap-y-6">
+      <Button bgColor="gray" size="small" href={clientRoutes.gists}>
+        <ArrowLeftCircle /> Go Back
+      </Button>
 
-        {gist ? (
-          <>
-            <h1 className="text-4xl">{gist.fileNameAndExtension}</h1>
+      {gist ? (
+        <>
+          <div className="self-start sm:self-center">
+            <PageHeading>{gist.fileNameAndExtension}</PageHeading>
+          </div>
 
-            <p className="text-base sm:text-xl">{gist.description}</p>
+          <Paragraph>{gist.description}</Paragraph>
 
-            <CodeHighlighterFull code={gist.code} />
-          </>
-        ) : null}
-      </div>
+          <CodeHighlighterFull code={gist.code} />
+        </>
+      ) : null}
 
-      <div className="flex items-center justify-center gap-x-10 mx-auto w-3/4 mt-10">
-        <Button bgColor="sky" shade="light" size="small" href={`/gists/${params.id}/edit`}>
+      <div className="flex flex-col gap-y-6 items-center justify-center mx-auto w-3/4 sm:gap-x-6 sm:flex-row">
+        <Button bgColor="sky" size="small" href={`/gists/${params.id}/edit`}>
           <FileEdit /> Edit this gist
         </Button>
 

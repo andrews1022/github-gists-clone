@@ -3,17 +3,20 @@ import { ArrowLeftCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { CreateGistForm } from "@/components/CreateGistForm";
 import { clientRoutes } from "@/constants/routes";
+import { PageHeading } from "@/components/ui/page-heading";
 
 const CreateGistPage = () => {
   return (
     <div>
       <div className="flex items-start">
-        <Button bgColor="gray" shade="dark" size="small" href={clientRoutes.gists}>
+        <Button bgColor="gray" size="small" href={clientRoutes.gists}>
           <ArrowLeftCircle /> Go Back
         </Button>
       </div>
 
-      <h1 className="my-6 text-left sm:text-center text-4xl">Create a gist</h1>
+      <div className="my-6">
+        <PageHeading>Create a gist</PageHeading>
+      </div>
 
       <CreateGistForm />
     </div>

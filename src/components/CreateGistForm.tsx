@@ -6,7 +6,6 @@ import { Suspense, useState } from "react";
 import { useForm } from "react-hook-form";
 import CodeMirror from "@uiw/react-codemirror";
 import { githubLight } from "@uiw/codemirror-theme-github";
-import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { LoadingIcon } from "@/components/LoadingIcon";
@@ -19,25 +18,8 @@ import { useToast } from "@/shadcn/ui/use-toast";
 
 import { apiRoutes, clientRoutes } from "@/constants/routes";
 
-const fileNameAndExtensionRegex = /^[\w-]+\.[\w-]+$/;
-
-const formSchema = z.object({
-  fileNameAndExtension: z
-    .string()
-    .min(1, "Name must be at least 1 character")
-    .max(100, "Name cannot be more than 100 characters")
-    .regex(
-      new RegExp(fileNameAndExtensionRegex),
-      "Name must be a valid file name with extension, eg: useMyCustomHook.ts"
-    ),
-  description: z
-    .string()
-    .min(1, "Description must be at least 1 character")
-    .max(1000, "Description cannot be more than 1000 characters"),
-  code: z.string().min(1, "Description must be at least 1 character")
-});
-
-type FormInputs = z.infer<typeof formSchema>;
+import { formSchema } from "@/lib/forms";
+import type { FormInputs } from "@/lib/forms";
 
 const CreateGistForm = () => {
   const router = useRouter();
@@ -146,7 +128,7 @@ const CreateGistForm = () => {
         </Suspense>
 
         <div className="flex justify-center">
-          <Button bgColor="emerald" shade="light" size="large" type="submit">
+          <Button bgColor="emerald" size="large" type="submit">
             {isLoading ? (
               <>
                 <LoadingIcon fill="emerald" /> <span>Loading...</span>
