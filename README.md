@@ -1,6 +1,6 @@
 # GitHub Gists Clone
 
-A full stack clone of GitHub Gists. The project uses:
+A full stack clone of GitHub Gists. This project uses:
 
 - Next.js
 - TypeScript
