@@ -1,4 +1,4 @@
-import { timestamp, pgTable, text, primaryKey, integer, uuid } from "drizzle-orm/pg-core";
+import { integer, pgTable, primaryKey, text, timestamp, uuid } from "drizzle-orm/pg-core";
 import type { AdapterAccount } from "@auth/core/adapters";
 
 export const users = pgTable("user", {
@@ -26,8 +26,8 @@ export const accounts = pgTable(
     id_token: text("id_token"),
     session_state: text("session_state")
   },
-  (account) => ({
-    compoundKey: primaryKey(account.provider, account.providerAccountId)
+  (table) => ({
+    compoundKey: primaryKey(table.provider, table.providerAccountId)
   })
 );
 
@@ -46,8 +46,8 @@ export const verificationTokens = pgTable(
     token: text("token").notNull(),
     expires: timestamp("expires", { mode: "date" }).notNull()
   },
-  (vt) => ({
-    compoundKey: primaryKey(vt.identifier, vt.token)
+  (table) => ({
+    compoundKey: primaryKey(table.identifier, table.token)
   })
 );
 
